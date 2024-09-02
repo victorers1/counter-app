@@ -27,7 +27,7 @@ fun SingleLineTextField(
         placeholder = { Text(text = "Counter") },
         onValueChange = {
             text = it.take(maxLength)
-            onChangedValue(text);
+            onChangedValue(text)
         })
 }
 

@@ -16,7 +16,7 @@ class AppStartupInfoUseCaseModule {
 
     @Provides
     fun provideReadAppStartupInfoUseCase(repository: AppStartupInfoRepository): ReadAppStartupInfoUseCase {
-        return ReadStartupInfoUseCaseImpl(repository);
+        return ReadStartupInfoUseCaseImpl(repository)
     }
 
     @Provides

@@ -132,7 +132,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onEditedHeadline(id: String, headline: String) {
-        // TODO add debouncer
         _uiState.update { state ->
             val newData = _uiState.value.data.map { counter ->
                 if (counter.id == id) counter.copy(label = headline) else counter
