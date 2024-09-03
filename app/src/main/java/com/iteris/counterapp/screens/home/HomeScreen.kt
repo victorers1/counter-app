@@ -41,7 +41,7 @@ fun HomeScreen() {
             modifier = Modifier.fillMaxSize(),
             topBar = {
                 TopAppBar(
-                    title = { Text(text = "Counter App") },
+                    title = { Text(text = "Home") },
                     colors = TopAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
                         actionIconContentColor = MaterialTheme.colorScheme.onSurface,

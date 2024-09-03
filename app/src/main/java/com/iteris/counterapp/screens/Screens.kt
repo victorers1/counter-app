@@ -1,7 +1,6 @@
 package com.iteris.counterapp.screens
 
-import androidx.navigation.NavArgument
-
-sealed class  Screens(val route: String, val navArgument: List<NavArgument> = emptyList()) {
+sealed class Screens(val route: String) {
     data object Home : Screens(route = "home")
+    data object Settings : Screens(route = "settings")
 }
