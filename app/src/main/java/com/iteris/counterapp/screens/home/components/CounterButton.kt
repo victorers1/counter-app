@@ -1,4 +1,4 @@
-package com.iteris.counterapp.screens.components
+package com.iteris.counterapp.screens.home.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background

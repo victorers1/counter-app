@@ -1,4 +1,4 @@
-package com.iteris.counterapp.screens.components
+package com.iteris.counterapp.screens.home.components
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
@@ -10,7 +10,6 @@ import com.iteris.counterapp.ui.theme.CounterAppTheme
 
 @Composable
 fun CounterListItem(
-    modifier: Modifier = Modifier,
     isEditing: Boolean = false,
     onDelete: () -> Unit,
     counterEntity: CounterEntity,
@@ -19,9 +18,7 @@ fun CounterListItem(
     onDecrement: () -> Unit,
     onChangedHeadline: (value: String) -> Unit,
 ) {
-
     EditableListItem(
-        modifier = modifier,
         headlineText = counterEntity.label.take(counterNameMaxLength),
         isEditing = isEditing,
         onDelete = onDelete,

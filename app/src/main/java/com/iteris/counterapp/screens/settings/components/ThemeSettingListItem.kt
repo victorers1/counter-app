@@ -1,0 +1,121 @@
+package com.iteris.counterapp.screens.settings.components
+
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.iteris.counterapp.screens.settings.ThemeMode
+import com.iteris.counterapp.ui.components.listitems.IconListItem
+import com.iteris.counterapp.ui.theme.CounterAppTheme
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ThemeSettingListItem(
+    selectedOption: ThemeMode,
+    options: List<ThemeMode>,
+    onSelectedOption: (ThemeMode) -> Unit
+) {
+    var isExpanded by remember { mutableStateOf(false) }
+
+    IconListItem(
+        leadingIcon = selectedOption.icon,
+        title = "App Theme",
+        description = "Using ${selectedOption.name}"
+    ) {
+        ExposedDropdownMenuBox(
+            modifier = Modifier.width(200.dp),
+            expanded = isExpanded,
+            onExpandedChange = { isExpanded = !isExpanded },
+
+
+        ) {
+            TextField(
+                modifier = Modifier.menuAnchor(),
+                value = selectedOption.name, onValueChange = {},
+                textStyle = MaterialTheme.typography.titleMedium,
+                readOnly = true,
+                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded) }
+            )
+            ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
+                options.forEach {
+                    DropdownMenuItem(
+                        text = { Text(text = it.name) },
+                        contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                        onClick = {
+                            isExpanded = false
+                            onSelectedOption(it)
+                        },
+                    )
+                }
+            }
+        }
+
+
+    }
+}
+
+
+@Preview
+@Composable
+private fun PrevLight() {
+    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    CounterAppTheme {
+        ThemeSettingListItem(
+            selectedOption = ThemeMode.Light,
+            options = options,
+            onSelectedOption = {},
+        )
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PrevDark() {
+    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    CounterAppTheme {
+        ThemeSettingListItem(
+            selectedOption = ThemeMode.Dark,
+            options = options,
+            onSelectedOption = {},
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun PrevSystemLight() {
+    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    CounterAppTheme {
+        ThemeSettingListItem(
+            selectedOption = ThemeMode.System,
+            options = options,
+            onSelectedOption = {},
+        )
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PrevSystemDark() {
+    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    CounterAppTheme {
+        ThemeSettingListItem(
+            selectedOption = ThemeMode.System,
+            options = options,
+            onSelectedOption = {},
+        )
+    }
+}

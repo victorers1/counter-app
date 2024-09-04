@@ -22,7 +22,6 @@ import com.iteris.counterapp.ui.theme.CounterAppTheme
 
 @Composable
 fun EditableListItem(
-    modifier: Modifier = Modifier,
     isEditing: Boolean = false,
     headlineText: String,
     headLineMaxLength: Int,
@@ -31,7 +30,6 @@ fun EditableListItem(
     trailingContent: @Composable () -> Unit
 ) {
     ListItem(
-        modifier = modifier,
         headlineContent = {
             if (isEditing) SingleLineTextField(
                 maxLength = headLineMaxLength,
@@ -59,7 +57,7 @@ fun EditableListItem(
 
 @Preview
 @Composable
-private fun EditableListItemPrevEditingLight() {
+private fun PrevEditingLight() {
     CounterAppTheme {
         EditableListItem(
             headlineText = "Counter name",
@@ -72,12 +70,8 @@ private fun EditableListItemPrevEditingLight() {
                     Modifier
                         .background(MaterialTheme.colorScheme.secondary)
                         .padding(16.dp),
-
                     contentAlignment = Alignment.Center,
-
-                    ) {
-                    Text(text = "Trailing")
-                }
+                ) { Text(text = "Trailing") }
             },
         )
     }
@@ -85,7 +79,7 @@ private fun EditableListItemPrevEditingLight() {
 
 @Preview
 @Composable
-private fun EditableListItemPrevNotEditingLight() {
+private fun PrevNotEditingLight() {
     CounterAppTheme {
         EditableListItem(
             headlineText = "Counter name",
@@ -99,9 +93,7 @@ private fun EditableListItemPrevNotEditingLight() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                         .padding(16.dp),
                     contentAlignment = Alignment.Center
-                ) {
-                    Text(text = "Trailing")
-                }
+                ) { Text(text = "Trailing") }
             },
         )
     }
@@ -109,7 +101,7 @@ private fun EditableListItemPrevNotEditingLight() {
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun EditableListItemPrevEditingDark() {
+private fun PrevEditingDark() {
     CounterAppTheme {
         EditableListItem(
             headlineText = "Counter name",
@@ -123,9 +115,7 @@ private fun EditableListItemPrevEditingDark() {
                         .background(MaterialTheme.colorScheme.secondary)
                         .padding(16.dp),
                     contentAlignment = Alignment.Center
-                ) {
-                    Text(text = "Trailing")
-                }
+                ) { Text(text = "Trailing") }
             },
         )
     }
@@ -133,7 +123,7 @@ private fun EditableListItemPrevEditingDark() {
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun EditableListItemPrevNotEditingDark() {
+private fun PrevNotEditingDark() {
     CounterAppTheme {
         EditableListItem(
             headlineText = "Counter name",
@@ -147,9 +137,7 @@ private fun EditableListItemPrevNotEditingDark() {
                         .background(MaterialTheme.colorScheme.inversePrimary)
                         .padding(16.dp),
                     contentAlignment = Alignment.Center
-                ) {
-                    Text(text = "Trailing")
-                }
+                ) { Text(text = "Trailing") }
             },
         )
     }

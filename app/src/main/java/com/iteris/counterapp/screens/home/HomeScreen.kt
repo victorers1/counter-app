@@ -22,7 +22,7 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.iteris.counterapp.screens.components.CounterListItem
+import com.iteris.counterapp.screens.home.components.CounterListItem
 import com.iteris.counterapp.ui.compose.screen.BaseScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
