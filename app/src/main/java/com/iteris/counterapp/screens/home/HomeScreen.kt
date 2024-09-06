@@ -1,7 +1,6 @@
 package com.iteris.counterapp.screens.home
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -20,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.iteris.counterapp.screens.home.components.CounterListItem
 import com.iteris.counterapp.ui.compose.screen.BaseScreen
@@ -74,11 +72,7 @@ fun HomeScreen() {
                     }
             },
         ) { innerPadding ->
-            LazyColumn(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(top = 16.dp)
-            ) {
+            LazyColumn(contentPadding = innerPadding) {
                 items(count = uiState.value.data.size) {
                     val counter = uiState.value.data[it]
                     key(counter.id) {

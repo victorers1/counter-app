@@ -14,17 +14,17 @@ sealed class BottomTabs(
     val label: String = "Label",
     val route: String = ""
 ) {
-    data object HomeTab : BottomTabs(
+    data object Home : BottomTabs(
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home,
         label = "Home",
-        route = Screens.Home.route
+        route = "home-tab"
     )
 
-    data object SettingsTab : BottomTabs(
+    data object Settings : BottomTabs(
         selectedIcon = Icons.Filled.Settings,
         unselectedIcon = Icons.Outlined.Settings,
         label = "Settings",
-        route = Screens.Settings.route
+        route = "settings-tab"
     )
 }

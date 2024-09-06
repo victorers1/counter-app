@@ -1,7 +1,10 @@
 package com.iteris.counterapp.screens.settings.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -15,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.iteris.counterapp.screens.settings.ThemeMode
@@ -29,6 +33,8 @@ fun ThemeSettingListItem(
     onSelectedOption: (ThemeMode) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
+    val width = LocalConfiguration.current.screenWidthDp
+    val dropdownWidth = width.div(2)
 
     IconListItem(
         leadingIcon = selectedOption.icon,
@@ -36,20 +42,22 @@ fun ThemeSettingListItem(
         description = "Using ${selectedOption.name}"
     ) {
         ExposedDropdownMenuBox(
-            modifier = Modifier.width(200.dp),
+            modifier = Modifier
+                .wrapContentWidth()
+                .widthIn(0.dp, 300.dp)
+                .width(dropdownWidth.dp),
             expanded = isExpanded,
             onExpandedChange = { isExpanded = !isExpanded },
-
-
-        ) {
+            ) {
             TextField(
-                modifier = Modifier.menuAnchor(),
+                modifier = Modifier.fillMaxWidth().menuAnchor(),
                 value = selectedOption.name, onValueChange = {},
                 textStyle = MaterialTheme.typography.titleMedium,
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded) }
             )
-            ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
+            ExposedDropdownMenu(
+                expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
                 options.forEach {
                     DropdownMenuItem(
                         text = { Text(text = it.name) },
@@ -62,8 +70,6 @@ fun ThemeSettingListItem(
                 }
             }
         }
-
-
     }
 }
 

@@ -17,33 +17,34 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.iteris.counterapp.screens.BottomTabs
-import com.iteris.counterapp.screens.Screens
 import com.iteris.counterapp.screens.home.HomeScreen
-import com.iteris.counterapp.screens.settings.SettingsScreen
+import com.iteris.counterapp.screens.settings.SettingsNavHost
 import com.iteris.counterapp.ui.components.bottomappbar.BottomNavBar
 
 @Composable
-fun CounterApp(navController: NavHostController = rememberNavController()) {
+fun CounterApp() {
+    val rootNavController: NavHostController = rememberNavController()
+
     Surface(color = MaterialTheme.colorScheme.background) {
-        val bottomTabs = remember { listOf(BottomTabs.HomeTab, BottomTabs.SettingsTab) }
+        val bottomTabs = remember { listOf(BottomTabs.Home, BottomTabs.Settings) }
         var selectedTab by remember { mutableStateOf(bottomTabs.first()) }
 
-        LaunchedEffect(navController) {
-            navController.currentBackStackEntryFlow.collect { backStackEntry ->
+        LaunchedEffect(rootNavController) {
+            rootNavController.currentBackStackEntryFlow.collect { backStackEntry ->
                 when (backStackEntry.destination.route) {
-                    BottomTabs.HomeTab.route -> selectedTab = BottomTabs.HomeTab
-                    BottomTabs.SettingsTab.route -> selectedTab = BottomTabs.SettingsTab
+                    BottomTabs.Home.route -> selectedTab = BottomTabs.Home
+                    BottomTabs.Settings.route -> selectedTab = BottomTabs.Settings
                 }
             }
         }
 
         Column(modifier = Modifier.fillMaxSize()) {
-            CounterAppNavHost(modifier = Modifier.weight(1f), navController = navController)
+            CounterRootAppNavHost(modifier = Modifier.weight(1f), navController = rootNavController)
             BottomNavBar(bottomTabs, selectedTab, onClickTab = { tab ->
                 selectedTab = tab
-                navController.navigate(tab.route, navOptions = navOptions {
+                rootNavController.navigate(tab.route, navOptions = navOptions {
                     launchSingleTop = true
-                    popUpTo(navController.graph.startDestinationId)
+                    popUpTo(rootNavController.graph.startDestinationId)
                 })
             })
         }
@@ -51,17 +52,17 @@ fun CounterApp(navController: NavHostController = rememberNavController()) {
 }
 
 @Composable
-fun CounterAppNavHost(
+fun CounterRootAppNavHost(
     modifier: Modifier = Modifier, navController: NavHostController
 ) {
     NavHost(
-        modifier = modifier, navController = navController, startDestination = Screens.Home.route
+        modifier = modifier, navController = navController, startDestination = BottomTabs.Home.route
     ) {
-        composable(route = Screens.Home.route) {
+        composable(route = BottomTabs.Home.route) {
             HomeScreen()
         }
-        composable(route = Screens.Settings.route) {
-            SettingsScreen()
+        composable(route = BottomTabs.Settings.route) {
+            SettingsNavHost()
         }
     }
 }

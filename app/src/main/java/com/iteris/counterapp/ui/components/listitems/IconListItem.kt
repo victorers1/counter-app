@@ -19,12 +19,14 @@ import com.iteris.counterapp.ui.theme.CounterAppTheme
 
 @Composable
 fun IconListItem(
+    modifier: Modifier = Modifier,
     leadingIcon: ImageVector,
     title: String,
     description: String,
     trailingContent: @Composable () -> Unit
 ) {
     ListItem(
+        modifier = modifier,
         leadingContent = {
             Icon(imageVector = leadingIcon, contentDescription = leadingIcon.toString())
         },
