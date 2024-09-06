@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.first
 
 class AppStartupInfoDataSourceImpl(private val context: Context) :
     AppStartupInfoDataSource {
-    private val Context.dataUser: DataStore<Preferences> by preferencesDataStore("app_startup_info")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("app_startup_info")
 
     companion object {
         private val STARTUP_COUNT = intPreferencesKey("STARTUP_COUNT")
@@ -21,7 +21,7 @@ class AppStartupInfoDataSourceImpl(private val context: Context) :
     }
 
     override suspend fun read(): AppStartupInfoLocalStorageModel {
-        val prefs = context.dataUser.data.first()
+        val prefs = context.dataStore.data.first()
         return AppStartupInfoLocalStorageModel(
             prefs[STARTUP_COUNT] ?: 0,
             prefs[STARTUP_TIMESTAMP] ?: 0L
@@ -29,9 +29,15 @@ class AppStartupInfoDataSourceImpl(private val context: Context) :
     }
 
     override suspend fun write(data: AppStartupInfoLocalStorageModel) {
-        context.dataUser.edit {
+        context.dataStore.edit {
             it[STARTUP_COUNT] = data.count ?: it[STARTUP_COUNT] ?: 0
             it[STARTUP_TIMESTAMP] = data.timestamp ?: it[STARTUP_TIMESTAMP] ?: 0L
+        }
+    }
+
+    override suspend fun deleteAll() {
+        context.dataStore.edit {
+            it.clear()
         }
     }
 }

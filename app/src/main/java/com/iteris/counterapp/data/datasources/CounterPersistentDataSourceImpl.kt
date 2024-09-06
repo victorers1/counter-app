@@ -22,4 +22,8 @@ class CounterPersistentDataSourceImpl(private val dao: CounterDao) : CounterData
     override fun delete(data: CounterLocalStorageModel) {
         dao.deleteCounter(data.toRoomModel())
     }
+
+    override fun deleteAll() {
+        return dao.deleteAllCounters()
+    }
 }

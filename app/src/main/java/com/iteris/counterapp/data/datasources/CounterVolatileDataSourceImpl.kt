@@ -27,6 +27,10 @@ class CounterVolatileDataSourceImpl : CounterDataSource {
         counters.removeIf { it.id == data.id }
     }
 
+    override fun deleteAll() {
+        counters.clear()
+    }
+
     private fun generateId(): String {
         return java.util.UUID.randomUUID().toString()
     }

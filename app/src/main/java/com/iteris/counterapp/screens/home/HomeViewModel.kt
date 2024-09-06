@@ -7,16 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.iteris.counterapp.core.extensions.toDateAndHour
 import com.iteris.counterapp.core.utils.Debouncer
 import com.iteris.counterapp.domain.entities.CounterEntity
-import com.iteris.counterapp.domain.usecases.CreateCounterParams
-import com.iteris.counterapp.domain.usecases.CreateCounterUseCase
-import com.iteris.counterapp.domain.usecases.DeleteCounterParams
-import com.iteris.counterapp.domain.usecases.DeleteCounterUseCase
-import com.iteris.counterapp.domain.usecases.ReadAllCountersUseCase
-import com.iteris.counterapp.domain.usecases.ReadAppStartupInfoUseCase
-import com.iteris.counterapp.domain.usecases.UpdateCounterParams
-import com.iteris.counterapp.domain.usecases.UpdateCounterUseCase
-import com.iteris.counterapp.domain.usecases.WriteAppStartupInfoParams
-import com.iteris.counterapp.domain.usecases.WriteAppStartupInfoUseCase
+import com.iteris.counterapp.domain.usecases.counters.CreateCounterParams
+import com.iteris.counterapp.domain.usecases.counters.CreateCounterUseCase
+import com.iteris.counterapp.domain.usecases.counters.DeleteCounterParams
+import com.iteris.counterapp.domain.usecases.counters.DeleteCounterUseCase
+import com.iteris.counterapp.domain.usecases.counters.ReadAllCountersUseCase
+import com.iteris.counterapp.domain.usecases.appstartinfo.ReadAppStartupInfoUseCase
+import com.iteris.counterapp.domain.usecases.counters.UpdateCounterParams
+import com.iteris.counterapp.domain.usecases.counters.UpdateCounterUseCase
+import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoParams
+import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoUseCase
 import com.iteris.counterapp.ui.compose.errors.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -44,11 +44,10 @@ class HomeViewModel @Inject constructor(
     private val _debouncer = Debouncer()
 
     init {
-        loadAllCounters()
         loadAppStartupInfo(context)
     }
 
-    private fun loadAllCounters() {
+    fun loadAllCounters() {
         viewModelScope.launch(Dispatchers.IO) {
             val result = readAllCountersUseCase.execute()
             result.onSuccess { counters ->

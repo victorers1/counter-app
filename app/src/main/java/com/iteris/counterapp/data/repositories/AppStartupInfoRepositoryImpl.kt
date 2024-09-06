@@ -26,4 +26,12 @@ class AppStartupInfoRepositoryImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+    override suspend fun deleteAll(): Result<Unit> {
+        return try {
+            Result.success(appStartupInfoDataSource.deleteAll())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

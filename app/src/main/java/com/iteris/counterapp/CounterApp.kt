@@ -52,11 +52,11 @@ fun CounterApp() {
 }
 
 @Composable
-fun CounterRootAppNavHost(
-    modifier: Modifier = Modifier, navController: NavHostController
-) {
+fun CounterRootAppNavHost(modifier: Modifier = Modifier, navController: NavHostController) {
     NavHost(
-        modifier = modifier, navController = navController, startDestination = BottomTabs.Home.route
+        modifier = modifier,
+        navController = navController,
+        startDestination = BottomTabs.Home.route
     ) {
         composable(route = BottomTabs.Home.route) {
             HomeScreen()

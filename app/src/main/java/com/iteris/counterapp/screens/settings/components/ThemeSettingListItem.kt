@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.iteris.counterapp.screens.settings.ThemeMode
+import com.iteris.counterapp.ui.theme.ThemeMode
 import com.iteris.counterapp.ui.components.listitems.IconListItem
 import com.iteris.counterapp.ui.theme.CounterAppTheme
 

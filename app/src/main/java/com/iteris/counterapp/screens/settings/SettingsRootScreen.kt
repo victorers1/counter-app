@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.iteris.counterapp.screens.settings.components.AppVersion
+import com.iteris.counterapp.screens.settings.components.EraseAppDataConfirmDialog
 import com.iteris.counterapp.screens.settings.components.EraseUserDataListItem
 import com.iteris.counterapp.screens.settings.components.PoliciesListItem
 import com.iteris.counterapp.screens.settings.components.ThemeSettingListItem
@@ -35,6 +35,13 @@ fun SettingsRootScreen(settingsNavController: NavController) {
                     .padding(top = innerPadding.calculateTopPadding())
                     .verticalScroll(rememberScrollState())
             ) {
+
+                if (uiState.value.showEraseDataConfirmDialog)
+                    EraseAppDataConfirmDialog(
+                        onDismiss = { viewModel.toggleEraseDataConfirmDialog() },
+                        onConfim = { viewModel.onEraseAllUserData() }
+                    )
+
                 ThemeSettingListItem(
                     selectedOption = uiState.value.themeMode,
                     options = uiState.value.supportedThemeModes,
@@ -45,7 +52,19 @@ fun SettingsRootScreen(settingsNavController: NavController) {
                     settingsNavController.navigate(SettingsTabScreens.Policies.route)
                 })
 
-                EraseUserDataListItem(onCLick = { viewModel.onEraseAllUserData() })
+                EraseUserDataListItem(onCLick = { viewModel.toggleEraseDataConfirmDialog() })
+
+                // TODO: App Language
+
+                // TODO: internet detector
+
+                // TODO: animations on counters
+
+                // TODO: save settings in persistent memory
+
+                // TODO: error treatment
+
+                // TODO: securiry features
 
                 // TODO: about the App
 

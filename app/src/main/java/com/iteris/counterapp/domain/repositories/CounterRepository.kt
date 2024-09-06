@@ -7,4 +7,5 @@ interface CounterRepository {
     suspend fun readAll(): Result<ArrayList<CounterEntity>>
     suspend fun update(counter: CounterEntity): Result<Unit>
     suspend fun delete(counter: CounterEntity): Result<Unit>
+    suspend fun deleteAll(): Result<Unit>
 }

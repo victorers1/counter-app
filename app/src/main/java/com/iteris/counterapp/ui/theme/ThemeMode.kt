@@ -1,4 +1,4 @@
-package com.iteris.counterapp.screens.settings
+package com.iteris.counterapp.ui.theme
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android

@@ -7,4 +7,5 @@ interface CounterDataSource {
     fun readAll(): ArrayList<CounterLocalStorageModel>
     fun update(data: CounterLocalStorageModel)
     fun delete(data: CounterLocalStorageModel)
+    fun deleteAll()
 }

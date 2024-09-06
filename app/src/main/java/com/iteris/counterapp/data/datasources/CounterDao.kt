@@ -23,4 +23,6 @@ interface CounterDao {
     @Delete
     fun deleteCounter(counter: CounterRoomModel)
 
+    @Query("DELETE FROM counter")
+    fun deleteAllCounters()
 }

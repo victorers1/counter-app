@@ -1,4 +1,4 @@
-package com.iteris.counterapp.domain.usecases
+package com.iteris.counterapp.domain.usecases.appstartinfo
 
 import com.iteris.counterapp.domain.entities.AppStartupInfoEntity
 import com.iteris.counterapp.domain.repositories.AppStartupInfoRepository
