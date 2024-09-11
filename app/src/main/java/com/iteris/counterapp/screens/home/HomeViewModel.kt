@@ -7,16 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.iteris.counterapp.core.extensions.toDateAndHour
 import com.iteris.counterapp.core.utils.Debouncer
 import com.iteris.counterapp.domain.entities.CounterEntity
+import com.iteris.counterapp.domain.usecases.appstartinfo.ReadAppStartupInfoUseCase
+import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoParams
+import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoUseCase
 import com.iteris.counterapp.domain.usecases.counters.CreateCounterParams
 import com.iteris.counterapp.domain.usecases.counters.CreateCounterUseCase
 import com.iteris.counterapp.domain.usecases.counters.DeleteCounterParams
 import com.iteris.counterapp.domain.usecases.counters.DeleteCounterUseCase
 import com.iteris.counterapp.domain.usecases.counters.ReadAllCountersUseCase
-import com.iteris.counterapp.domain.usecases.appstartinfo.ReadAppStartupInfoUseCase
 import com.iteris.counterapp.domain.usecases.counters.UpdateCounterParams
 import com.iteris.counterapp.domain.usecases.counters.UpdateCounterUseCase
-import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoParams
-import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoUseCase
 import com.iteris.counterapp.ui.compose.errors.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -60,7 +60,6 @@ class HomeViewModel @Inject constructor(
 
     private fun loadAppStartupInfo(context: Context) {
         viewModelScope.launch {
-
             readAppStartupParams()
 
             val dateLastOpened = _uiState.value.appStartupInfo?.date?.toDateAndHour()
@@ -70,20 +69,20 @@ class HomeViewModel @Inject constructor(
                 Toast.LENGTH_LONG
             ).show()
 
-            val writeParams = WriteAppStartupInfoParams(
-                count = (_uiState.value.appStartupInfo?.count ?: 0) + 1,
-                date = Date()
-            )
-            val resultWrite = writeAppStartupInfoUseCase.execute(writeParams)
-
-            resultWrite.onSuccess {
-                readAppStartupParams()
-                Toast.makeText(
-                    context,
-                    "You opened this app ${_uiState.value.appStartupInfo?.count} times",
-                    Toast.LENGTH_LONG
-                ).show()
+            viewModelScope.launch(Dispatchers.IO) {
+                val writeParams = WriteAppStartupInfoParams(
+                    count = (_uiState.value.appStartupInfo?.count ?: 0) + 1,
+                    date = Date()
+                )
+                writeAppStartupInfoUseCase.execute(writeParams)
             }
+
+            readAppStartupParams()
+            Toast.makeText(
+                context,
+                "You opened this app ${_uiState.value.appStartupInfo?.count} times",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 

@@ -8,9 +8,9 @@ interface DeleteAppStartupInfoUseCase {
 }
 
 class DeleteAppStartupInfoUseCaseImpl @Inject constructor(
-    private val appStartupInfoRepository: AppStartupInfoRepository
+    private val repository: AppStartupInfoRepository
 ) : DeleteAppStartupInfoUseCase {
     override suspend fun execute(): Result<Unit> {
-        return appStartupInfoRepository.deleteAll()
+        return repository.deleteAll()
     }
 }

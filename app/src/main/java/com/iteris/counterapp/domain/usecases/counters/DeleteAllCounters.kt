@@ -8,10 +8,10 @@ interface DeleteAllCountersUseCase{
 }
 
 class DeleteAllCountersUseCaseImpl @Inject constructor(
-    private  val counterRepository: CounterRepository
+    private  val repository: CounterRepository
 ) : DeleteAllCountersUseCase {
 
     override suspend fun execute(): Result<Unit> {
-        return counterRepository.deleteAll()
+        return repository.deleteAll()
     }
 }

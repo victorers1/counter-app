@@ -1,8 +1,8 @@
 package com.iteris.counterapp.data.repositories
 
 import com.iteris.counterapp.core.exceptions.GenericException
-import com.iteris.counterapp.data.extensions.toEntity
-import com.iteris.counterapp.data.extensions.toLocalStorageModel
+import com.iteris.counterapp.data.models.toEntity
+import com.iteris.counterapp.data.models.toLocalStorageModel
 import com.iteris.counterapp.domain.datasources.CounterDataSource
 import com.iteris.counterapp.domain.entities.CounterEntity
 import com.iteris.counterapp.domain.repositories.CounterRepository

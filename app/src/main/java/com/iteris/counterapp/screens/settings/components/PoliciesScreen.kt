@@ -2,7 +2,6 @@ package com.iteris.counterapp.screens.settings.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.filled.Policy
 import androidx.compose.material3.Icon
@@ -15,8 +14,8 @@ fun PoliciesListItem(onClick: () -> Unit) {
     IconListItem(
         modifier = Modifier.clickable(onClick = onClick),
         leadingIcon = Icons.Default.Policy,
-        title = "Policies",
-        description = "Important information",
+        title = "Policies Page",
+        description = "Read important information",
         trailingContent = {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowRight,

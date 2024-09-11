@@ -9,9 +9,9 @@ interface ReadAllCountersUseCase {
 }
 
 class ReadAllCountersUseCaseImpl @Inject constructor(
-    private val counterRepository: CounterRepository
+    private val repository: CounterRepository
 ) : ReadAllCountersUseCase {
     override suspend fun execute(): Result<ArrayList<CounterEntity>> {
-        return counterRepository.readAll()
+        return repository.readAll()
     }
 }

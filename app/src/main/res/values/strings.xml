@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CounterApp</string>
+    <string name="app_settings_data_store_name" translatable="false">app_settings</string>
+    <string name="default_language_code" translatable="false">en</string>
 </resources>

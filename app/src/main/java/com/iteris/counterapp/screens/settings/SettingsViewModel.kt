@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iteris.counterapp.domain.usecases.appstartinfo.DeleteAppStartupInfoUseCase
 import com.iteris.counterapp.domain.usecases.counters.DeleteAllCountersUseCase
-import com.iteris.counterapp.domain.usecases.counters.ReadAllCountersUseCase
-import com.iteris.counterapp.ui.theme.ThemeMode
+import com.iteris.counterapp.domain.usecases.settings.ReadAppSettingsUseCase
+import com.iteris.counterapp.domain.usecases.settings.WriteAppSettingsParams
+import com.iteris.counterapp.domain.usecases.settings.WriteAppSettingsUseCase
+import com.iteris.counterapp.ui.compose.errors.ErrorState
+import com.iteris.counterapp.ui.theme.ThemeModeEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -21,18 +24,48 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val deleteAppStartupInfoUseCase: DeleteAppStartupInfoUseCase,
-    private val readAllCountersUseCase: ReadAllCountersUseCase,
     private val deleteAllCountersUseCase: DeleteAllCountersUseCase,
+    private val readAppSettingsUseCase: ReadAppSettingsUseCase,
+    private val writeAppSettingsUseCase: WriteAppSettingsUseCase,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
-    fun onChangeThemeMode(newThemeMode: ThemeMode) {
-        _uiState.update {
-            it.copy(
-                themeMode = newThemeMode
+    init {
+        loadSettings()
+    }
+
+    private fun loadSettings() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = readAppSettingsUseCase.execute()
+
+            result.onSuccess {
+                it.collect {
+                    _uiState.update { state ->
+                        state.copy(
+                            themeModeEntity = it.themeMode, locale = it.locale
+                        )
+                    }
+                }
+            }.onFailure {
+                _uiState.update { state -> state.copy(error = ErrorState.ReadError) }
+            }
+        }
+    }
+
+    fun onChangeThemeMode(newThemeModeEntity: ThemeModeEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val params = WriteAppSettingsParams(
+                newThemeModeEntity, _uiState.value.locale
             )
+            val result = writeAppSettingsUseCase.execute(params)
+
+            result.onSuccess {
+                loadSettings()
+            }.onFailure {
+                _uiState.update { state -> state.copy(error = ErrorState.UpdateError) }
+            }
         }
     }
 

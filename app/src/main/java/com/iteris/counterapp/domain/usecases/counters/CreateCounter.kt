@@ -11,10 +11,10 @@ interface CreateCounterUseCase {
 }
 
 class CreateCounterUseCaseImpl @Inject constructor(
-    private val counterRepository: CounterRepository
+    private val repository: CounterRepository
 ) : CreateCounterUseCase {
     override suspend fun execute(params: CreateCounterParams): Result<Unit> {
         val counterEntity = CounterEntity(params.id, params.label, params.value)
-        return counterRepository.create(counterEntity)
+        return repository.create(counterEntity)
     }
 }

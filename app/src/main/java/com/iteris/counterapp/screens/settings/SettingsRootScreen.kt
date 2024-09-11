@@ -43,8 +43,8 @@ fun SettingsRootScreen(settingsNavController: NavController) {
                     )
 
                 ThemeSettingListItem(
-                    selectedOption = uiState.value.themeMode,
-                    options = uiState.value.supportedThemeModes,
+                    selectedOption = uiState.value.themeModeEntity,
+                    options = uiState.value.supportedThemeModeEntities,
                     onSelectedOption = { viewModel.onChangeThemeMode(it) },
                 )
 

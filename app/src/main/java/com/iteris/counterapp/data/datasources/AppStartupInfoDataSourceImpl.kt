@@ -16,22 +16,22 @@ class AppStartupInfoDataSourceImpl(private val context: Context) :
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("app_startup_info")
 
     companion object {
-        private val STARTUP_COUNT = intPreferencesKey("STARTUP_COUNT")
-        private val STARTUP_TIMESTAMP = longPreferencesKey("STARTUP_TIMESTAMP")
+        private val STARTUP_COUNT_KEY = intPreferencesKey("STARTUP_COUNT")
+        private val STARTUP_TIMESTAMP_KEY = longPreferencesKey("STARTUP_TIMESTAMP")
     }
 
     override suspend fun read(): AppStartupInfoLocalStorageModel {
         val prefs = context.dataStore.data.first()
         return AppStartupInfoLocalStorageModel(
-            prefs[STARTUP_COUNT] ?: 0,
-            prefs[STARTUP_TIMESTAMP] ?: 0L
+            prefs[STARTUP_COUNT_KEY] ?: 0,
+            prefs[STARTUP_TIMESTAMP_KEY] ?: 0L
         )
     }
 
     override suspend fun write(data: AppStartupInfoLocalStorageModel) {
         context.dataStore.edit {
-            it[STARTUP_COUNT] = data.count ?: it[STARTUP_COUNT] ?: 0
-            it[STARTUP_TIMESTAMP] = data.timestamp ?: it[STARTUP_TIMESTAMP] ?: 0L
+            it[STARTUP_COUNT_KEY] = data.count ?: it[STARTUP_COUNT_KEY] ?: 0
+            it[STARTUP_TIMESTAMP_KEY] = data.timestamp ?: it[STARTUP_TIMESTAMP_KEY] ?: 0L
         }
     }
 

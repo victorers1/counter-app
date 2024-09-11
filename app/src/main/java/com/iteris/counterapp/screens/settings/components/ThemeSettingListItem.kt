@@ -21,16 +21,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.iteris.counterapp.ui.theme.ThemeMode
 import com.iteris.counterapp.ui.components.listitems.IconListItem
 import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.ThemeModeEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemeSettingListItem(
-    selectedOption: ThemeMode,
-    options: List<ThemeMode>,
-    onSelectedOption: (ThemeMode) -> Unit
+    selectedOption: ThemeModeEntity,
+    options: List<ThemeModeEntity>,
+    onSelectedOption: (ThemeModeEntity) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
     val width = LocalConfiguration.current.screenWidthDp
@@ -38,7 +38,7 @@ fun ThemeSettingListItem(
 
     IconListItem(
         leadingIcon = selectedOption.icon,
-        title = "App Theme",
+        title = "Theme",
         description = "Using ${selectedOption.name}"
     ) {
         ExposedDropdownMenuBox(
@@ -48,9 +48,11 @@ fun ThemeSettingListItem(
                 .width(dropdownWidth.dp),
             expanded = isExpanded,
             onExpandedChange = { isExpanded = !isExpanded },
-            ) {
+        ) {
             TextField(
-                modifier = Modifier.fillMaxWidth().menuAnchor(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .menuAnchor(),
                 value = selectedOption.name, onValueChange = {},
                 textStyle = MaterialTheme.typography.titleMedium,
                 readOnly = true,
@@ -77,10 +79,10 @@ fun ThemeSettingListItem(
 @Preview
 @Composable
 private fun PrevLight() {
-    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
     CounterAppTheme {
         ThemeSettingListItem(
-            selectedOption = ThemeMode.Light,
+            selectedOption = ThemeModeEntity.Light,
             options = options,
             onSelectedOption = {},
         )
@@ -90,10 +92,10 @@ private fun PrevLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PrevDark() {
-    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
     CounterAppTheme {
         ThemeSettingListItem(
-            selectedOption = ThemeMode.Dark,
+            selectedOption = ThemeModeEntity.Dark,
             options = options,
             onSelectedOption = {},
         )
@@ -103,10 +105,10 @@ private fun PrevDark() {
 @Preview
 @Composable
 private fun PrevSystemLight() {
-    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
     CounterAppTheme {
         ThemeSettingListItem(
-            selectedOption = ThemeMode.System,
+            selectedOption = ThemeModeEntity.System,
             options = options,
             onSelectedOption = {},
         )
@@ -116,10 +118,10 @@ private fun PrevSystemLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PrevSystemDark() {
-    val options = listOf(ThemeMode.Light, ThemeMode.Dark, ThemeMode.System)
+    val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
     CounterAppTheme {
         ThemeSettingListItem(
-            selectedOption = ThemeMode.System,
+            selectedOption = ThemeModeEntity.System,
             options = options,
             onSelectedOption = {},
         )

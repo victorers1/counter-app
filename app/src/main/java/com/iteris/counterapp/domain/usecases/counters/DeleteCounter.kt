@@ -11,10 +11,10 @@ interface DeleteCounterUseCase {
 }
 
 class DeleteCounterUseCaseImpl @Inject constructor(
-    private val counterRepository: CounterRepository
+    private val repository: CounterRepository
 ) : DeleteCounterUseCase {
     override suspend fun execute(params: DeleteCounterParams): Result<Unit> {
         val entity = CounterEntity(params.id, params.label, params.value)
-        return counterRepository.delete(entity)
+        return repository.delete(entity)
     }
 }

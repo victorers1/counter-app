@@ -9,9 +9,9 @@ interface ReadAppStartupInfoUseCase {
 }
 
 class ReadAppStartupInfoUseCaseImpl @Inject constructor(
-    private val appStartupInfoRepository: AppStartupInfoRepository
+    private val repository: AppStartupInfoRepository
 ) : ReadAppStartupInfoUseCase {
     override suspend fun execute(): Result<AppStartupInfoEntity> {
-        return appStartupInfoRepository.read()
+        return repository.read()
     }
 }

@@ -13,11 +13,11 @@ interface WriteAppStartupInfoUseCase {
 }
 
 class WriteAppStartupInfoUseCaseImpl @Inject constructor(
-    private val appStartupInfoRepository: AppStartupInfoRepository
+    private val repository: AppStartupInfoRepository
 ) : WriteAppStartupInfoUseCase {
 
     override suspend fun execute(params: WriteAppStartupInfoParams): Result<Unit> {
         val entity = AppStartupInfoEntity(params.count, params.date)
-        return appStartupInfoRepository.write(entity)
+        return repository.write(entity)
     }
 }

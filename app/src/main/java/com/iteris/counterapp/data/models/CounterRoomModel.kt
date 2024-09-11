@@ -10,3 +10,16 @@ data class CounterRoomModel(
     val label: String,
     val value: Int
 )
+
+
+fun CounterLocalStorageModel.toRoomModel() = CounterRoomModel(
+    id = this.id ?: "",
+    label = this.label ?: "",
+    value = this.value ?: 0
+)
+
+fun CounterRoomModel.toLocalStorageModel() = CounterLocalStorageModel(
+    id = this.id,
+    label = this.label,
+    value = this.value
+)

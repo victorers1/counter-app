@@ -1,8 +1,8 @@
 package com.iteris.counterapp.data.datasources
 
-import com.iteris.counterapp.data.extensions.toLocalStorageModel
-import com.iteris.counterapp.data.extensions.toRoomModel
 import com.iteris.counterapp.data.models.CounterLocalStorageModel
+import com.iteris.counterapp.data.models.toLocalStorageModel
+import com.iteris.counterapp.data.models.toRoomModel
 import com.iteris.counterapp.domain.datasources.CounterDataSource
 
 class CounterPersistentDataSourceImpl(private val dao: CounterDao) : CounterDataSource {
