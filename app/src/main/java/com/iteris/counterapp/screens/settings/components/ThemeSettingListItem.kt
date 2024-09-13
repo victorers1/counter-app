@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.iteris.counterapp.ui.components.listitems.IconListItem
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.PreviewAppTheme
 import com.iteris.counterapp.ui.theme.ThemeModeEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,7 +59,8 @@ fun ThemeSettingListItem(
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded) }
             )
             ExposedDropdownMenu(
-                expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
+                expanded = isExpanded, onDismissRequest = { isExpanded = false }
+            ) {
                 options.forEach {
                     DropdownMenuItem(
                         text = { Text(text = it.name) },
@@ -80,7 +81,7 @@ fun ThemeSettingListItem(
 @Composable
 private fun PrevLight() {
     val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
-    CounterAppTheme {
+    PreviewAppTheme {
         ThemeSettingListItem(
             selectedOption = ThemeModeEntity.Light,
             options = options,
@@ -93,7 +94,7 @@ private fun PrevLight() {
 @Composable
 private fun PrevDark() {
     val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
-    CounterAppTheme {
+    PreviewAppTheme {
         ThemeSettingListItem(
             selectedOption = ThemeModeEntity.Dark,
             options = options,
@@ -106,7 +107,7 @@ private fun PrevDark() {
 @Composable
 private fun PrevSystemLight() {
     val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
-    CounterAppTheme {
+    PreviewAppTheme {
         ThemeSettingListItem(
             selectedOption = ThemeModeEntity.System,
             options = options,
@@ -119,7 +120,7 @@ private fun PrevSystemLight() {
 @Composable
 private fun PrevSystemDark() {
     val options = listOf(ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System)
-    CounterAppTheme {
+    PreviewAppTheme {
         ThemeSettingListItem(
             selectedOption = ThemeModeEntity.System,
             options = options,

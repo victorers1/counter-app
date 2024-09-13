@@ -7,6 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.iteris.counterapp.domain.entities.CounterEntity
 import com.iteris.counterapp.ui.components.listitems.EditableListItem
 import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.PreviewAppTheme
 
 @Composable
 fun CounterListItem(
@@ -38,7 +39,7 @@ private fun ItemLight() {
     val counterEntity = CounterEntity(
         id = "", label = "Voltas no parque de manhã bem cedinho às 05:00 da manhã", value = 6
     )
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterListItem(
             counterEntity = counterEntity,
             onIncrement = {},
@@ -56,7 +57,7 @@ private fun ItemDark() {
     val counterEntity = CounterEntity(
         id = "", label = "Voltas no parque de manhã bem cedinho às 05:00 da manhã", value = 6
     )
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterListItem(
             counterEntity = counterEntity,
             onIncrement = {},
@@ -74,7 +75,7 @@ private fun ItemEditingLight() {
     val counterEntity = CounterEntity(
         id = "", label = "Voltas no parque de manhã bem cedinho às 05:00 da manhã", value = 6
     )
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterListItem(
             isEditing = true,
             counterEntity = counterEntity,
@@ -93,7 +94,7 @@ private fun ItemEditingDark() {
     val counterEntity = CounterEntity(
         id = "", label = "Voltas no parque de manhã bem cedinho às 05:00 da manhã", value = 6
     )
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterListItem(
             isEditing = true,
             counterEntity = counterEntity,

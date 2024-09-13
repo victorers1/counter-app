@@ -13,25 +13,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.PreviewAppTheme
 
 @Composable
 fun CounterButton(icon: ImageVector, onCLick: (() -> Unit)?) {
     IconButton(
         modifier = Modifier.background(
             color = MaterialTheme.colorScheme.primary,
-            shape = CircleShape
-        ),
-        colors = IconButtonDefaults.iconButtonColors(
+            shape = CircleShape,
+        ), colors = IconButtonDefaults.iconButtonColors(
             contentColor = MaterialTheme.colorScheme.onPrimary,
             containerColor = MaterialTheme.colorScheme.primary,
-        ),
-        onClick = onCLick ?: {},
-        enabled = onCLick != null
+        ), onClick = onCLick ?: {}, enabled = onCLick != null
     ) {
-        Icon(
-            imageVector = icon, contentDescription = "Decrement counter value",
-        )
+        Icon(imageVector = icon, contentDescription = "Decrement counter value")
     }
 }
 
@@ -39,7 +34,7 @@ fun CounterButton(icon: ImageVector, onCLick: (() -> Unit)?) {
 @Preview(showBackground = true)
 @Composable
 private fun EnabledLight() {
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterButton(icon = Icons.Default.Home, onCLick = {})
     }
 }
@@ -48,7 +43,7 @@ private fun EnabledLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 private fun EnabledDark() {
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterButton(icon = Icons.Default.Home, onCLick = {})
     }
 }
@@ -57,7 +52,7 @@ private fun EnabledDark() {
 @Preview(showBackground = true)
 @Composable
 private fun DisabledLight() {
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterButton(icon = Icons.Default.Home, onCLick = null)
     }
 }
@@ -66,7 +61,7 @@ private fun DisabledLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 private fun DisabledDark() {
-    CounterAppTheme {
+    PreviewAppTheme {
         CounterButton(icon = Icons.Default.Home, onCLick = null)
     }
 }

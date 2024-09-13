@@ -16,11 +16,5 @@ fun PoliciesListItem(onClick: () -> Unit) {
         leadingIcon = Icons.Default.Policy,
         title = "Policies Page",
         description = "Read important information",
-        trailingContent = {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowRight,
-                contentDescription = "Forward arrow"
-            )
-        }
     )
 }

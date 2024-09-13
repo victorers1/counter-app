@@ -21,7 +21,7 @@ loggingInterceptor = "4.12.0"
 constraintlayoutCompose = "1.0.1"
 protobufGradlePlugin = "0.9.4"
 retrofit = "2.11.0"
-materialIconsExtended = "1.6.8"
+materialIconsExtended = "1.7.1"
 datastorePreferences = "1.1.1"
 datastore = "1.1.1"
 protobufKotlinLite = "4.28.0"
@@ -29,6 +29,7 @@ protobufJavalite = "4.28.0"
 navigationCompose = "2.7.7"
 roomVersion = "2.6.1"
 roomKtx = "2.6.1"
+lifecycleRuntime = "2.8.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -68,6 +69,7 @@ protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-
 protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobufJavalite" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "lifecycleRuntime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

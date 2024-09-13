@@ -9,12 +9,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.iteris.counterapp.screens.settings.components.AboutUsListItem
 import com.iteris.counterapp.screens.settings.components.AppVersion
 import com.iteris.counterapp.screens.settings.components.EraseAppDataConfirmDialog
 import com.iteris.counterapp.screens.settings.components.EraseUserDataListItem
@@ -26,7 +27,7 @@ import com.iteris.counterapp.ui.compose.screen.BaseScreen
 @Composable
 fun SettingsRootScreen(settingsNavController: NavController) {
     val viewModel: SettingsViewModel = hiltViewModel()
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     BaseScreen(onRetry = { /*TODO*/ }, onErrorClosed = { /*TODO*/ }) {
         Scaffold(topBar = { TopAppBar(title = { Text(text = "Settings") }) }) { innerPadding ->
@@ -54,19 +55,24 @@ fun SettingsRootScreen(settingsNavController: NavController) {
 
                 EraseUserDataListItem(onCLick = { viewModel.toggleEraseDataConfirmDialog() })
 
-                // TODO: App Language
+                AboutUsListItem(onCLick = {
+                    settingsNavController.navigate(SettingsTabScreens.AboutUs.route)
+                })
+                // TODO: Animations on counter created and deletion
 
-                // TODO: internet detector
-
-                // TODO: animations on counters
-
-                // TODO: save settings in persistent memory
+                // TODO: Change Language
 
                 // TODO: error treatment
 
                 // TODO: securiry features
 
-                // TODO: about the App
+                // TODO: about the App page with internet signal status just for fun
+
+                // TODO: Ascessibility: treat text size config
+
+                // TODO: Accessibility: adaptable UI to foldable big screen
+
+                // TODO: change status bar color according to the theme mode
 
                 AppVersion(
                     modifier = Modifier

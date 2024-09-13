@@ -17,11 +17,5 @@ fun EraseUserDataListItem(onCLick: ()-> Unit) {
         leadingIcon = Icons.Default.DeleteForever,
         title = "Delete data",
         description = "This can't be undone",
-        trailingContent = {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowRight,
-                contentDescription = "Forward arrow"
-            )
-        }
     )
 }

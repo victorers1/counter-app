@@ -1,6 +1,8 @@
 package com.iteris.counterapp.ui.components.listitems
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -30,25 +32,33 @@ fun EditableListItem(
     trailingContent: @Composable () -> Unit
 ) {
     ListItem(
+        modifier = Modifier.animateContentSize(),
         headlineContent = {
-            if (isEditing) SingleLineTextField(
-                maxLength = headLineMaxLength,
-                initialValue = headlineText,
-                onChangedValue = onChangedHeadline,
-            )
-            else Text(
-                text = headlineText,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 2,
-            )
+            AnimatedContent(targetState = isEditing, label = "Headline content") { state ->
+                when (state) {
+                    true -> SingleLineTextField(
+                        maxLength = headLineMaxLength,
+                        initialValue = headlineText,
+                        onChangedValue = onChangedHeadline,
+                    )
+
+                    else -> Text(
+                        text = headlineText,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 2,
+                    )
+                }
+            }
         },
         trailingContent = {
-            if (isEditing) {
-                IconButton(onClick = onDelete) {
-                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete icon")
+            AnimatedContent(targetState = isEditing, label = "Trailing content") { state ->
+                when (state) {
+                    true -> IconButton(onClick = onDelete) {
+                        Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete icon")
+                    }
+
+                    else -> trailingContent()
                 }
-            } else {
-                trailingContent()
             }
         },
     )
@@ -64,7 +74,7 @@ private fun PrevEditingLight() {
             onDelete = { },
             isEditing = true,
             headLineMaxLength = 10,
-            onChangedHeadline = {},
+            onChangedHeadline = { },
             trailingContent = {
                 Box(
                     Modifier
@@ -86,7 +96,7 @@ private fun PrevNotEditingLight() {
             onDelete = { },
             isEditing = false,
             headLineMaxLength = 10,
-            onChangedHeadline = {},
+            onChangedHeadline = { },
             trailingContent = {
                 Box(
                     Modifier

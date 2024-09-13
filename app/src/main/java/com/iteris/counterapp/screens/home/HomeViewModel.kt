@@ -1,7 +1,6 @@
 package com.iteris.counterapp.screens.home
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iteris.counterapp.core.extensions.toDateAndHour
@@ -17,6 +16,7 @@ import com.iteris.counterapp.domain.usecases.counters.DeleteCounterUseCase
 import com.iteris.counterapp.domain.usecases.counters.ReadAllCountersUseCase
 import com.iteris.counterapp.domain.usecases.counters.UpdateCounterParams
 import com.iteris.counterapp.domain.usecases.counters.UpdateCounterUseCase
+import com.iteris.counterapp.ui.components.toasts.showInfoToast
 import com.iteris.counterapp.ui.compose.errors.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -63,11 +63,7 @@ class HomeViewModel @Inject constructor(
             readAppStartupParams()
 
             val dateLastOpened = _uiState.value.appStartupInfo?.date?.toDateAndHour()
-            Toast.makeText(
-                context,
-                "Last time you've opened this app was $dateLastOpened",
-                Toast.LENGTH_LONG
-            ).show()
+            showInfoToast(context, "Last time you've opened this app was $dateLastOpened")
 
             viewModelScope.launch(Dispatchers.IO) {
                 val writeParams = WriteAppStartupInfoParams(
@@ -78,11 +74,10 @@ class HomeViewModel @Inject constructor(
             }
 
             readAppStartupParams()
-            Toast.makeText(
+            showInfoToast(
                 context,
-                "You opened this app ${_uiState.value.appStartupInfo?.count} times",
-                Toast.LENGTH_LONG
-            ).show()
+                "You opened this app ${_uiState.value.appStartupInfo?.count} times"
+            )
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -20,19 +21,26 @@ import com.iteris.counterapp.ui.theme.CounterAppTheme
 @Composable
 fun IconListItem(
     modifier: Modifier = Modifier,
-    leadingIcon: ImageVector,
+    leadingIcon: ImageVector?,
     title: String,
     description: String,
-    trailingContent: @Composable () -> Unit
+    trailingContent: @Composable (() -> Unit)? = null
 ) {
     ListItem(
         modifier = modifier,
         leadingContent = {
-            Icon(imageVector = leadingIcon, contentDescription = leadingIcon.toString())
+            if (leadingIcon != null) {
+                Icon(imageVector = leadingIcon, contentDescription = leadingIcon.toString())
+            }
         },
         headlineContent = { Text(text = title) },
-        supportingContent = { Text(text = description) },
-        trailingContent = trailingContent,
+        supportingContent = { if (description.isNotBlank()) Text(text = description) },
+        trailingContent = {
+            trailingContent?.invoke() ?: Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowRight,
+                contentDescription = "Forward arrow"
+            )
+        }
     )
 }
 

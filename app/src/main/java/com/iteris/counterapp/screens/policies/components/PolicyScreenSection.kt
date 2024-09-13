@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.iteris.counterapp.R
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.PreviewAppTheme
 
 @Composable
 fun PolicyScreenSection(title: String, drawable: Int) {
@@ -42,11 +41,10 @@ fun PolicyScreenSection(title: String, drawable: Int) {
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
 private fun PrevLight() {
-    CounterAppTheme {
+    PreviewAppTheme {
         PolicyScreenSection(title = "Terms of Usage", drawable = R.drawable.policies_confia)
     }
 }
@@ -54,7 +52,7 @@ private fun PrevLight() {
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PrevDark() {
-    CounterAppTheme {
+    PreviewAppTheme {
         PolicyScreenSection(title = "Terms of Usage", drawable = R.drawable.policies_confia)
     }
 }
