@@ -2,11 +2,9 @@ package com.iteris.counterapp.screens.home.components
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.iteris.counterapp.domain.entities.CounterEntity
+import com.iteris.counterapp.domain.entities.counter.CounterEntity
 import com.iteris.counterapp.ui.components.listitems.EditableListItem
-import com.iteris.counterapp.ui.theme.CounterAppTheme
 import com.iteris.counterapp.ui.theme.PreviewAppTheme
 
 @Composable

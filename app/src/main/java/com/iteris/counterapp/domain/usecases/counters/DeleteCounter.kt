@@ -1,6 +1,6 @@
 package com.iteris.counterapp.domain.usecases.counters
 
-import com.iteris.counterapp.domain.entities.CounterEntity
+import com.iteris.counterapp.domain.entities.counter.CounterEntity
 import com.iteris.counterapp.domain.repositories.CounterRepository
 import javax.inject.Inject
 

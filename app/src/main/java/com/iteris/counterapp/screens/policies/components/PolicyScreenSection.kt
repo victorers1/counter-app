@@ -40,7 +40,6 @@ fun PolicyScreenSection(title: String, drawable: Int) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun PrevLight() {

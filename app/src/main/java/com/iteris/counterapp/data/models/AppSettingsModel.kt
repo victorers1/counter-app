@@ -1,6 +1,6 @@
 package com.iteris.counterapp.data.models
 
-import com.iteris.counterapp.domain.entities.AppSettingsEntity
+import com.iteris.counterapp.domain.entities.settings.AppSettingsEntity
 import com.iteris.counterapp.ui.locale.LocaleModeEntity
 import com.iteris.counterapp.ui.theme.ThemeModeEntity
 

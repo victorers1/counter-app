@@ -58,7 +58,6 @@ fun AnimatedCounter(value: Int, oldValue: Int) {
                     ),
                 )
             }
-
         }
     }
 }

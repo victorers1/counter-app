@@ -1,7 +1,7 @@
 package com.iteris.counterapp.screens.home
 
 import com.iteris.counterapp.domain.entities.AppStartupInfoEntity
-import com.iteris.counterapp.domain.entities.CounterEntity
+import com.iteris.counterapp.domain.entities.counter.CounterEntity
 import com.iteris.counterapp.ui.compose.errors.ErrorState
 
 data class HomeUiState(

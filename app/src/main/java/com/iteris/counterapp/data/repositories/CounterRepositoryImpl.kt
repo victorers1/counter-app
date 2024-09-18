@@ -4,7 +4,7 @@ import com.iteris.counterapp.core.exceptions.GenericException
 import com.iteris.counterapp.data.models.toEntity
 import com.iteris.counterapp.data.models.toLocalStorageModel
 import com.iteris.counterapp.domain.datasources.CounterDataSource
-import com.iteris.counterapp.domain.entities.CounterEntity
+import com.iteris.counterapp.domain.entities.counter.CounterEntity
 import com.iteris.counterapp.domain.repositories.CounterRepository
 import javax.inject.Inject
 
@@ -50,7 +50,7 @@ class CounterRepositoryImpl @Inject constructor(private val counterDataSource: C
     override suspend fun deleteAll(): Result<Unit> {
         return try {
             Result.success(counterDataSource.deleteAll())
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Result.failure(GenericException("Erro while deleting counters"))
         }
     }

@@ -1,6 +1,6 @@
 package com.iteris.counterapp.domain.repositories
 
-import com.iteris.counterapp.domain.entities.CounterEntity
+import com.iteris.counterapp.domain.entities.counter.CounterEntity
 
 interface CounterRepository {
     suspend fun create(counter: CounterEntity): Result<Unit>

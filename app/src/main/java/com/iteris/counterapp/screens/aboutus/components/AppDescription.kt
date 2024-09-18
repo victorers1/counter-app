@@ -1,7 +1,6 @@
 package com.iteris.counterapp.screens.aboutus.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,14 +20,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.iteris.counterapp.R
 import com.iteris.counterapp.ui.theme.PreviewAppTheme
 
 @Composable
@@ -84,7 +81,9 @@ fun AppDescription(modifier: Modifier = Modifier) {
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                modifier = Modifier.padding(end = 2.dp),
+                modifier = Modifier
+                    .padding(end = 4.dp)
+                    .size(18.dp),
                 imageVector = Icons.Default.Link,
                 contentDescription = "Personal link"
             )

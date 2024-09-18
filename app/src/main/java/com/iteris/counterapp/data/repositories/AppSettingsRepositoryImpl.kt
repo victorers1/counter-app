@@ -3,7 +3,7 @@ package com.iteris.counterapp.data.repositories
 import com.iteris.counterapp.data.models.toEntity
 import com.iteris.counterapp.data.models.toModel
 import com.iteris.counterapp.domain.datasources.AppSettingsDataSource
-import com.iteris.counterapp.domain.entities.AppSettingsEntity
+import com.iteris.counterapp.domain.entities.settings.AppSettingsEntity
 import com.iteris.counterapp.domain.repositories.AppSettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

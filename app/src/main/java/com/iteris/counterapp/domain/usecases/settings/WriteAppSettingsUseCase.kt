@@ -1,6 +1,6 @@
 package com.iteris.counterapp.domain.usecases.settings
 
-import com.iteris.counterapp.domain.entities.AppSettingsEntity
+import com.iteris.counterapp.domain.entities.settings.AppSettingsEntity
 import com.iteris.counterapp.domain.repositories.AppSettingsRepository
 import com.iteris.counterapp.ui.locale.LocaleModeEntity
 import com.iteris.counterapp.ui.theme.ThemeModeEntity

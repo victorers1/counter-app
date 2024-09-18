@@ -1,4 +1,4 @@
-package com.iteris.counterapp.domain.entities
+package com.iteris.counterapp.domain.entities.aboutus
 
 import com.iteris.counterapp.R
 

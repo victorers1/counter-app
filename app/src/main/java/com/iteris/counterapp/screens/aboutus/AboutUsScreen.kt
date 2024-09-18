@@ -12,28 +12,26 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.iteris.counterapp.R
+import com.iteris.counterapp.screens.aboutus.components.AboutUsSegmentedButtons
 import com.iteris.counterapp.screens.aboutus.components.AppDescription
-import com.iteris.counterapp.screens.aboutus.components.CallToActionButtonRow
+import com.iteris.counterapp.screens.aboutus.components.ElevatedButtonRow
 import com.iteris.counterapp.screens.aboutus.components.SocialLinksRow
 import com.iteris.counterapp.ui.components.avatars.CircularDrawableAvatar
+import com.iteris.counterapp.ui.components.imagegrids.NetworkImageGrid
 import com.iteris.counterapp.ui.components.topappbars.NavigateBackTopAppBar
 import com.iteris.counterapp.ui.compose.screen.BaseScreen
-import com.iteris.counterapp.ui.theme.PreviewAppTheme
 
 @Composable
 fun AboutUsScreen(onPop: () -> Unit) {
     BaseScreen(onRetry = { /*TODO*/ }, onErrorClosed = { /*TODO*/ }) {
         Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-            NavigateBackTopAppBar(
-                title = "About us", onPop = onPop
-            )
+            NavigateBackTopAppBar(title = "About us", onPop = onPop)
         }) { innerPadding ->
             Column(
                 modifier = Modifier
-                    .padding(innerPadding)
+                    .padding(top = innerPadding.calculateTopPadding())
                     .verticalScroll(rememberScrollState())
             ) {
                 Row(
@@ -54,17 +52,14 @@ fun AboutUsScreen(onPop: () -> Unit) {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                CallToActionButtonRow(modifier = Modifier.padding(horizontal = 16.dp))
+                ElevatedButtonRow(modifier = Modifier.padding(horizontal = 16.dp))
 
+                Spacer(modifier = Modifier.height(8.dp))
+
+                AboutUsSegmentedButtons(selectedSegment = 0, onClickSegment = {})
+
+                NetworkImageGrid(urls = List(10) { "https://avatar.iran.liara.run/public" })
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun PrevLight() {
-    PreviewAppTheme {
-        AboutUsScreen(onPop = {})
     }
 }

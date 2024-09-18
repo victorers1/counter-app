@@ -1,6 +1,6 @@
 package com.iteris.counterapp.domain.repositories
 
-import com.iteris.counterapp.domain.entities.AppSettingsEntity
+import com.iteris.counterapp.domain.entities.settings.AppSettingsEntity
 import kotlinx.coroutines.flow.Flow
 
 interface AppSettingsRepository {

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iteris.counterapp.core.extensions.toDateAndHour
 import com.iteris.counterapp.core.utils.Debouncer
-import com.iteris.counterapp.domain.entities.CounterEntity
+import com.iteris.counterapp.domain.entities.counter.CounterEntity
 import com.iteris.counterapp.domain.usecases.appstartinfo.ReadAppStartupInfoUseCase
 import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoParams
 import com.iteris.counterapp.domain.usecases.appstartinfo.WriteAppStartupInfoUseCase
