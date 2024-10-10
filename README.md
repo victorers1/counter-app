@@ -1,1 +1,2 @@
-Because of [this Bug](https://slack-chats.kotlinlang.org/t/22942553/i-m-getting-this-error-when-working-with-2-0-20-rc2-1-0-24-o), I had to run this command to kill the kotlin daemon: `jps | grep -E 'KotlinCompileDaemon' | awk '{print $1}' | xargs kill -9 || true`
+Because of [this Bug](https://github.com/google/ksp/issues/2072), I had to run this command to kill
+the kotlin daemon: `jps | grep -E 'KotlinCompileDaemon' | awk '{print $1}' | xargs kill -9 || true`
