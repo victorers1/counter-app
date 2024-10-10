@@ -12,11 +12,9 @@ data class SettingsUiState(
         LocaleModeEntity.Portuguese,
         LocaleModeEntity.Spanish,
     ),
-    val themeModeEntity: ThemeModeEntity = ThemeModeEntity.Light,
+    val themeModeEntity: ThemeModeEntity = ThemeModeEntity.System,
     val supportedThemeModeEntities: List<ThemeModeEntity> = listOf(
-        ThemeModeEntity.Light,
-        ThemeModeEntity.Dark,
-        ThemeModeEntity.System
+        ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System
     ),
     val showEraseDataConfirmDialog: Boolean = false,
     val error: ErrorState = ErrorState.NonError

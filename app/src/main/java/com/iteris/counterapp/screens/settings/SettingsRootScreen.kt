@@ -1,13 +1,17 @@
 package com.iteris.counterapp.screens.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,12 +34,23 @@ fun SettingsRootScreen(settingsNavController: NavController) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     BaseScreen(onRetry = { /*TODO*/ }, onErrorClosed = { /*TODO*/ }) {
-        Scaffold(topBar = { TopAppBar(title = { Text(text = "Settings") }) }) { innerPadding ->
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = "Settings") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    )
+                )
+            },
+        ) { innerPadding ->
             Column(
                 modifier = Modifier
                     .padding(top = innerPadding.calculateTopPadding())
                     .verticalScroll(rememberScrollState())
             ) {
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 if (uiState.value.showEraseDataConfirmDialog)
                     EraseAppDataConfirmDialog(
@@ -53,22 +68,19 @@ fun SettingsRootScreen(settingsNavController: NavController) {
                     settingsNavController.navigate(SettingsTabScreens.Policies.route)
                 })
 
-                EraseUserDataListItem(onCLick = { viewModel.toggleEraseDataConfirmDialog() })
+                EraseUserDataListItem(onClick = { viewModel.toggleEraseDataConfirmDialog() })
 
-                AboutUsListItem(onCLick = {
+                AboutUsListItem(onClick = {
                     settingsNavController.navigate(SettingsTabScreens.AboutUs.route)
                 })
-                // TODO: Animations on counter created and deletion
+
+                // TODO: Animations on counter creation and deletion
 
                 // TODO: Change Language
 
                 // TODO: error treatment
 
                 // TODO: securiry features
-
-                // TODO: about the App page with internet signal status just for fun
-
-                // TODO: Ascessibility: treat text size config
 
                 // TODO: Accessibility: adaptable UI to foldable big screen
 

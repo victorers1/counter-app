@@ -58,9 +58,7 @@ fun ThemeSettingListItem(
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded) }
             )
-            ExposedDropdownMenu(
-                expanded = isExpanded, onDismissRequest = { isExpanded = false }
-            ) {
+            ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
                 options.forEach {
                     DropdownMenuItem(
                         text = { Text(text = it.name) },

@@ -7,8 +7,6 @@ import com.iteris.counterapp.domain.datasources.AppSettingsDataSource
 import com.iteris.counterapp.domain.repositories.AppSettingsRepository
 import com.iteris.counterapp.domain.usecases.settings.ReadAppSettingsUseCase
 import com.iteris.counterapp.domain.usecases.settings.ReadAppSettingsUseCaseImpl
-import com.iteris.counterapp.domain.usecases.settings.ReadSystemThemeModeUseCase
-import com.iteris.counterapp.domain.usecases.settings.ReadSystemThemeModeUseCaseImpl
 import com.iteris.counterapp.domain.usecases.settings.WriteAppSettingsUseCase
 import com.iteris.counterapp.domain.usecases.settings.WriteAppSettingsUseCaseImpl
 import dagger.Module
@@ -45,11 +43,4 @@ class AppSettingsModule {
     fun provideWriteSettingsUseCase(repository: AppSettingsRepository): WriteAppSettingsUseCase {
         return WriteAppSettingsUseCaseImpl(repository)
     }
-
-    @Provides
-    @Singleton
-    fun provideReadSystemThemeModeUseCase(): ReadSystemThemeModeUseCase {
-        return ReadSystemThemeModeUseCaseImpl()
-    }
-
 }
