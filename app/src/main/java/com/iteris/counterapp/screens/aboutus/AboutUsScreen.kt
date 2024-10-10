@@ -10,6 +10,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,6 +29,9 @@ import com.iteris.counterapp.ui.compose.screen.BaseScreen
 
 @Composable
 fun AboutUsScreen(onPop: () -> Unit) {
+
+    var selectedSegment by remember { mutableIntStateOf(0) }
+
     BaseScreen(onRetry = { /*TODO*/ }, onErrorClosed = { /*TODO*/ }) {
         Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
             NavigateBackTopAppBar(title = "About us", onPop = onPop)
@@ -34,6 +41,9 @@ fun AboutUsScreen(onPop: () -> Unit) {
                     .padding(top = innerPadding.calculateTopPadding())
                     .verticalScroll(rememberScrollState())
             ) {
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Row(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -56,7 +66,9 @@ fun AboutUsScreen(onPop: () -> Unit) {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                AboutUsSegmentedButtons(selectedSegment = 0, onClickSegment = {})
+                AboutUsSegmentedButtons(selectedSegment = selectedSegment, onClickSegment = {
+                    selectedSegment = it
+                })
 
                 NetworkImageGrid(urls = List(10) { "https://avatar.iran.liara.run/public" })
             }
