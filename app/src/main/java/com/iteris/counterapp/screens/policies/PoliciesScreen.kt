@@ -3,7 +3,9 @@ package com.iteris.counterapp.screens.policies
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,9 +23,7 @@ import com.iteris.counterapp.ui.theme.PreviewAppTheme
 @Composable
 fun PoliciesScreen(onPop: () -> Unit) {
     Scaffold(
-        topBar = {
-            NavigateBackTopAppBar(title = "App Policies", onPop = onPop)
-        }
+        topBar = { NavigateBackTopAppBar(title = "App Policies", onPop = onPop) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -32,6 +32,8 @@ fun PoliciesScreen(onPop: () -> Unit) {
                 .padding(top = innerPadding.calculateTopPadding())
                 .verticalScroll(rememberScrollState()),
         ) {
+
+            Spacer(modifier = Modifier.height(32.dp))
 
             PolicyScreenSection(
                 title = "Terms of Service",

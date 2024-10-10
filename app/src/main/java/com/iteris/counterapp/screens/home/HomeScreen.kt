@@ -1,6 +1,8 @@
 package com.iteris.counterapp.screens.home
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -16,7 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -62,12 +64,8 @@ fun HomeScreen() {
             topBar = {
                 TopAppBar(
                     title = { Text(text = "Home") },
-                    colors = TopAppBarColors(
+                    colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                        actionIconContentColor = MaterialTheme.colorScheme.onSurface,
-                        titleContentColor = MaterialTheme.colorScheme.onSurface,
-                        scrolledContainerColor = MaterialTheme.colorScheme.tertiary,
-                        navigationIconContentColor = MaterialTheme.colorScheme.onSurface
                     ),
                     actions = {
                         if (uiState.value.isEditing)
@@ -98,6 +96,8 @@ fun HomeScreen() {
                 contentPadding = innerPadding,
             ) {
 
+                item { Spacer(modifier = Modifier.height(8.dp)) }
+
                 items(count = uiState.value.data.size) {
                     val counter = uiState.value.data[it]
                     key(counter.id) {
@@ -114,11 +114,10 @@ fun HomeScreen() {
                         )
                     }
 
-                    HorizontalDivider(
-                        modifier = Modifier.padding(vertical = 8.dp),
-                        thickness = .4.dp
-                    )
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 }
+
+                item { Spacer(modifier = Modifier.height(64.dp)) }
             }
         }
     }
