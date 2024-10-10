@@ -5,18 +5,22 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalDensity
 import com.iteris.counterapp.screens.BottomTabs
 
 @Composable
 fun BottomNavBar(
     bottomTabs: List<BottomTabs>, selectedTab: BottomTabs, onClickTab: (BottomTabs) -> Unit
 ) {
+    val fonsScale = LocalDensity.current.fontScale
+    val fontScaleThreshold = 1.3
+
     BottomAppBar(
         actions = {
             bottomTabs.map { tab ->
                 val isSelected = selectedTab == tab
                 NavigationBarItem(
-                    label = { Text(text = tab.label) },
+                    label = { if (fonsScale < fontScaleThreshold) Text(text = tab.label) },
                     selected = isSelected,
                     onClick = { onClickTab(tab) },
                     icon = {
