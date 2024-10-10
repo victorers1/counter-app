@@ -20,7 +20,7 @@ import com.iteris.counterapp.ui.theme.Typography
 fun AnimatedCounter(value: Int, oldValue: Int) {
     val valueTextStyle = MaterialTheme.typography.titleLarge
 
-    val textColor = when (value) {
+    val textColor = when (oldValue) {
         in 1..Int.MAX_VALUE -> valueTextStyle.color
         0 -> MaterialTheme.colorScheme.outline
         else -> MaterialTheme.colorScheme.error

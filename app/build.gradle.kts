@@ -107,7 +107,7 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.converter.gson)
 
-    //Coil
+    // Coil
     implementation(libs.coil.compose)
 
     // Lifecycle

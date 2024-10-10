@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import com.iteris.counterapp.ui.components.listitems.IconListItem
 
 @Composable
-fun AboutUsListItem(onCLick: () -> Unit) {
+fun AboutUsListItem(onClick: () -> Unit) {
     IconListItem(
-        modifier = Modifier.clickable(onClick = onCLick),
+        modifier = Modifier.clickable(onClick = onClick),
         leadingIcon = Icons.Default.Info, title = "About us", description = ""
     )
 }
