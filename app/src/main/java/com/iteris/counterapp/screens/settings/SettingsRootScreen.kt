@@ -23,6 +23,7 @@ import com.iteris.counterapp.screens.settings.components.AboutUsListItem
 import com.iteris.counterapp.screens.settings.components.AppVersion
 import com.iteris.counterapp.screens.settings.components.EraseAppDataConfirmDialog
 import com.iteris.counterapp.screens.settings.components.EraseUserDataListItem
+import com.iteris.counterapp.screens.settings.components.OpenSecretListItem
 import com.iteris.counterapp.screens.settings.components.PoliciesListItem
 import com.iteris.counterapp.screens.settings.components.ThemeSettingListItem
 import com.iteris.counterapp.ui.compose.screen.BaseScreen
@@ -37,8 +38,7 @@ fun SettingsRootScreen(settingsNavController: NavController) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = "Settings") },
-                    colors = TopAppBarDefaults.topAppBarColors(
+                    title = { Text(text = "Settings") }, colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     )
                 )
@@ -52,11 +52,8 @@ fun SettingsRootScreen(settingsNavController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                if (uiState.value.showEraseDataConfirmDialog)
-                    EraseAppDataConfirmDialog(
-                        onDismiss = { viewModel.toggleEraseDataConfirmDialog() },
-                        onConfim = { viewModel.onEraseAllUserData() }
-                    )
+                if (uiState.value.showEraseDataConfirmDialog) EraseAppDataConfirmDialog(onDismiss = { viewModel.toggleEraseDataConfirmDialog() },
+                    onConfim = { viewModel.onEraseAllUserData() })
 
                 ThemeSettingListItem(
                     selectedOption = uiState.value.themeModeEntity,
@@ -71,24 +68,23 @@ fun SettingsRootScreen(settingsNavController: NavController) {
                 EraseUserDataListItem(onClick = { viewModel.toggleEraseDataConfirmDialog() })
 
                 AboutUsListItem(onClick = {
+
                     settingsNavController.navigate(SettingsTabScreens.AboutUs.route)
                 })
 
-                // TODO: Animations on counter creation and deletion
+                OpenSecretListItem(onClick = {
+                    val canProceed = viewModel.tryToOpenSecretScreen()
 
-                // TODO: Change Language
-
-                // TODO: error treatment
-
-                // TODO: securiry features
-
-                // TODO: Accessibility: adaptable UI to foldable big screen
-
-                // TODO: change status bar color according to the theme mode
+                    if (canProceed) {
+                        settingsNavController.navigate(SettingsTabScreens.Secret.route)
+                    }
+                })
 
                 AppVersion(
                     modifier = Modifier
-                        .padding(top = 56.dp, bottom = innerPadding.calculateBottomPadding())
+                        .padding(
+                            top = 56.dp, bottom = innerPadding.calculateBottomPadding()
+                        )
                         .align(Alignment.CenterHorizontally)
                 )
             }

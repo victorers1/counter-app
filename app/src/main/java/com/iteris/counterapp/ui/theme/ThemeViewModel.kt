@@ -2,9 +2,11 @@ package com.iteris.counterapp.ui.theme
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.iteris.counterapp.domain.entities.settings.AppSettingsEntity
 import com.iteris.counterapp.domain.usecases.settings.ReadAppSettingsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,6 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/// A viewmodel just for the global Theme management.
 @HiltViewModel
 class ThemeViewModel @Inject constructor(
     private val readAppSettingsUseCase: ReadAppSettingsUseCase,
@@ -24,8 +27,8 @@ class ThemeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val resultSettings = readAppSettingsUseCase.execute()
 
-            resultSettings.onSuccess { settingsFlow ->
-                settingsFlow.collect { setting ->
+            resultSettings.onSuccess { settingsFlow: Flow<AppSettingsEntity> ->
+                settingsFlow.collect { setting: AppSettingsEntity ->
                     _themeMode.update { setting.themeMode }
                 }
             }

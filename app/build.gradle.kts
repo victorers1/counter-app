@@ -72,8 +72,13 @@ android {
 }
 
 dependencies {
+    // Biometry
+    implementation(libs.androidx.biometric.ktx)
+    implementation(libs.androidx.appcompat)
+
     // Room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.room.ktx)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
 

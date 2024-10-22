@@ -17,5 +17,5 @@ data class SettingsUiState(
         ThemeModeEntity.Light, ThemeModeEntity.Dark, ThemeModeEntity.System
     ),
     val showEraseDataConfirmDialog: Boolean = false,
-    val error: ErrorState = ErrorState.NonError
+    val error: ErrorState = ErrorState.NoError
 )

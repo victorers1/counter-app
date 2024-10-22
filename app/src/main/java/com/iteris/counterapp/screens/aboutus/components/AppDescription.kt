@@ -2,6 +2,7 @@ package com.iteris.counterapp.screens.aboutus.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material.icons.filled.Link
@@ -37,17 +38,11 @@ fun AppDescription(modifier: Modifier = Modifier) {
         append(personalLink)
         addStyle(
             style = SpanStyle(
-                color = MaterialTheme.colorScheme.primary,
-                textDecoration = TextDecoration.Underline
-            ),
-            start = 0,
-            end = personalLink.length
+                color = MaterialTheme.colorScheme.primary, textDecoration = TextDecoration.Underline
+            ), start = 0, end = personalLink.length
         )
         addStringAnnotation(
-            tag = "URL",
-            annotation = personalLink,
-            start = 0,
-            end = personalLink.length
+            tag = "URL", annotation = personalLink, start = 0, end = personalLink.length
         )
     }
 
@@ -60,15 +55,15 @@ fun AppDescription(modifier: Modifier = Modifier) {
         Row(
             modifier = Modifier
                 .background(
-                    color = MaterialTheme.colorScheme.surfaceContainer,
-                    shape = CircleShape
+                    color = MaterialTheme.colorScheme.surfaceContainer, shape = CircleShape
                 )
                 .padding(horizontal = 8.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 modifier = Modifier.size(12.dp),
-                imageVector = Icons.Default.AlternateEmail, contentDescription = "Threads logo"
+                imageVector = Icons.Default.AlternateEmail,
+                contentDescription = "Threads logo"
             )
             Spacer(modifier = Modifier.width(1.dp))
             Text(text = "victorers2", style = MaterialTheme.typography.bodySmall)
@@ -87,8 +82,10 @@ fun AppDescription(modifier: Modifier = Modifier) {
                 imageVector = Icons.Default.Link,
                 contentDescription = "Personal link"
             )
-            ClickableText(text = annotatedString,
-                onClick = { uriHandler.openUri(personalLink) })
+            BasicText(
+                text = annotatedString,
+                modifier = Modifier.clickable(onClick = { uriHandler.openUri(personalLink) })
+            )
         }
     }
 }

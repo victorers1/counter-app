@@ -30,12 +30,12 @@ import com.iteris.counterapp.ui.compose.screen.BaseScreen
 @Composable
 fun AboutUsScreen(onPop: () -> Unit) {
 
-    var selectedSegment by remember { mutableIntStateOf(0) }
+    var selectedSegmentIndex by remember { mutableIntStateOf(0) }
 
     BaseScreen(onRetry = { /*TODO*/ }, onErrorClosed = { /*TODO*/ }) {
-        Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-            NavigateBackTopAppBar(title = "About us", onPop = onPop)
-        }) { innerPadding ->
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            topBar = { NavigateBackTopAppBar(title = "About us", onPop = onPop) }) { innerPadding ->
             Column(
                 modifier = Modifier
                     .padding(top = innerPadding.calculateTopPadding())
@@ -66,8 +66,8 @@ fun AboutUsScreen(onPop: () -> Unit) {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                AboutUsSegmentedButtons(selectedSegment = selectedSegment, onClickSegment = {
-                    selectedSegment = it
+                AboutUsSegmentedButtons(selectedSegment = selectedSegmentIndex, onClickSegment = {
+                    selectedSegmentIndex = it
                 })
 
                 NetworkImageGrid(urls = List(10) { "https://avatar.iran.liara.run/public" })

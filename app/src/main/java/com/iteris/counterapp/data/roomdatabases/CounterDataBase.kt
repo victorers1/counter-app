@@ -7,7 +7,8 @@ import com.iteris.counterapp.data.models.CounterRoomModel
 
 @Database(
     entities = [CounterRoomModel::class],
-    version = 1
+    version = 1,
+    exportSchema = false,
 )
 abstract class CounterDataBase : RoomDatabase() {
 

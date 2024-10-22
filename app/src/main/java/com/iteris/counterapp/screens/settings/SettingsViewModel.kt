@@ -4,7 +4,10 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.iteris.counterapp.domain.entities.biometric_auth.BiometricAuthResultEntity
 import com.iteris.counterapp.domain.usecases.appstartinfo.DeleteAppStartupInfoUseCase
+import com.iteris.counterapp.domain.usecases.biometric_auth.AuthenticateWithBiometryParams
+import com.iteris.counterapp.domain.usecases.biometric_auth.AuthenticateWithBiometryUseCase
 import com.iteris.counterapp.domain.usecases.counters.DeleteAllCountersUseCase
 import com.iteris.counterapp.domain.usecases.settings.ReadAppSettingsUseCase
 import com.iteris.counterapp.domain.usecases.settings.WriteAppSettingsParams
@@ -27,6 +30,7 @@ class SettingsViewModel @Inject constructor(
     private val deleteAllCountersUseCase: DeleteAllCountersUseCase,
     private val readAppSettingsUseCase: ReadAppSettingsUseCase,
     private val writeAppSettingsUseCase: WriteAppSettingsUseCase,
+    private val authenticateWithBiometryUseCase: AuthenticateWithBiometryUseCase,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SettingsUiState())
@@ -96,5 +100,25 @@ class SettingsViewModel @Inject constructor(
                 Toast.makeText(context, feedbackMsg, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun tryToOpenSecretScreen(): Boolean {
+        var canProceed = false
+
+        viewModelScope.launch {
+            val params = AuthenticateWithBiometryParams(
+                title = "Authentication needed",
+                description = "Counter App needs to authenticate to open the secret screen"
+            )
+
+            val result = authenticateWithBiometryUseCase.execute(params)
+
+            result.onSuccess {
+                canProceed = it == BiometricAuthResultEntity.AuthenticationSucceeded
+            }.onFailure {
+                canProceed = false
+            }
+        }
+        return canProceed
     }
 }

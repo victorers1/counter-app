@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.iteris.counterapp.screens.aboutus.AboutUsScreen
 import com.iteris.counterapp.screens.policies.PoliciesScreen
+import com.iteris.counterapp.screens.secret.SecretScreen
 
 @Composable
 fun SettingsNavHost() {
@@ -21,15 +22,15 @@ fun SettingsNavHost() {
         }
 
         composable(SettingsTabScreens.Policies.route) {
-            PoliciesScreen(onPop = {
-                settingsNavHostController.popBackStack()
-            })
+            PoliciesScreen(onPop = { settingsNavHostController.popBackStack() })
         }
 
         composable(SettingsTabScreens.AboutUs.route) {
-            AboutUsScreen(onPop = {
-                settingsNavHostController.popBackStack()
-            })
+            AboutUsScreen(onPop = { settingsNavHostController.popBackStack() })
+        }
+
+        composable(SettingsTabScreens.Secret.route) {
+            SecretScreen(onPop = { settingsNavHostController.popBackStack() })
         }
     }
 }

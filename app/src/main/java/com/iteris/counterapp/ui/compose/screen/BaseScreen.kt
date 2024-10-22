@@ -11,17 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.iteris.counterapp.ui.compose.errors.ErrorState
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.DefaultAppTheme
 
+/// Every screen has this composabled as Parent
 @Composable
 fun BaseScreen(
     loading: Boolean = false,
-    error: ErrorState = ErrorState.NonError,
+    error: ErrorState = ErrorState.NoError,
     onRetry: () -> Unit,
     onErrorClosed: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    CounterAppTheme {
+    DefaultAppTheme {
         Surface {
             Box(modifier = Modifier.fillMaxSize()) {
                 content()

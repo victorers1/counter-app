@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.iteris.counterapp.ui.theme.Typography
+import com.iteris.counterapp.ui.theme.DefaultTypography
 
 @Composable
 fun AnimatedCounter(value: Int, oldValue: Int) {
@@ -52,7 +52,7 @@ fun AnimatedCounter(value: Int, oldValue: Int) {
                     text = it.toString(),
                     softWrap = false,
                     textAlign = TextAlign.Center,
-                    style = Typography.titleLarge.copy(
+                    style = DefaultTypography.titleLarge.copy(
                         color = textColor,
                         fontWeight = FontWeight.Bold
                     ),

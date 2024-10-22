@@ -13,7 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.DefaultAppTheme
 
 @Composable
 fun SingleLineTextField(
@@ -34,7 +34,7 @@ fun SingleLineTextField(
 @Preview(showBackground = true)
 @Composable
 private fun SingleLineTextFieldPrevLight() {
-    CounterAppTheme {
+    DefaultAppTheme {
         Box(modifier = Modifier.padding(10.dp)) {
             SingleLineTextField(
                 initialValue = "Counter Example", maxLength = 10,
@@ -47,7 +47,7 @@ private fun SingleLineTextFieldPrevLight() {
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun SingleLineTextFieldPrevDark() {
-    CounterAppTheme {
+    DefaultAppTheme {
         Box(modifier = Modifier.padding(10.dp)) {
             SingleLineTextField(
                 initialValue = "Counter Example",

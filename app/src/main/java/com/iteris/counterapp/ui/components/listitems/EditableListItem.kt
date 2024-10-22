@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.iteris.counterapp.ui.components.textfields.SingleLineTextField
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.DefaultAppTheme
 
 @Composable
 fun EditableListItem(
@@ -68,7 +68,7 @@ fun EditableListItem(
 @Preview
 @Composable
 private fun PrevEditingLight() {
-    CounterAppTheme {
+    DefaultAppTheme {
         EditableListItem(
             headlineText = "Counter name",
             onDelete = { },
@@ -90,7 +90,7 @@ private fun PrevEditingLight() {
 @Preview
 @Composable
 private fun PrevNotEditingLight() {
-    CounterAppTheme {
+    DefaultAppTheme {
         EditableListItem(
             headlineText = "Counter name",
             onDelete = { },
@@ -112,7 +112,7 @@ private fun PrevNotEditingLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PrevEditingDark() {
-    CounterAppTheme {
+    DefaultAppTheme {
         EditableListItem(
             headlineText = "Counter name",
             onDelete = { },
@@ -134,7 +134,7 @@ private fun PrevEditingDark() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PrevNotEditingDark() {
-    CounterAppTheme {
+    DefaultAppTheme {
         EditableListItem(
             headlineText = "Counter name",
             onDelete = { },

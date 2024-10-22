@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.DefaultAppTheme
 
 @Composable
 fun IconListItem(
@@ -61,7 +61,7 @@ fun IconListItem(
 @Preview
 @Composable
 private fun PrevLight() {
-    CounterAppTheme {
+    DefaultAppTheme {
         IconListItem(
             leadingIcon = Icons.Default.Settings,
             title = "Settings",
@@ -81,7 +81,7 @@ private fun PrevLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PrevDark() {
-    CounterAppTheme {
+    DefaultAppTheme {
         IconListItem(
             leadingIcon = Icons.Default.Settings,
             title = "Settings",

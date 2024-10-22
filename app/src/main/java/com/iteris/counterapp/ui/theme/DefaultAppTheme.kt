@@ -17,16 +17,16 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
-private val DarkColorScheme = darkColorScheme(
+private val DefaultDarkColorScheme = darkColorScheme(
     primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80
 )
 
-private val LightColorScheme = lightColorScheme(
+private val DefaultLightColorScheme = lightColorScheme(
     primary = Purple40, secondary = PurpleGrey40, tertiary = Pink40
 )
 
 @Composable
-fun CounterAppTheme(
+fun DefaultAppTheme(
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     themeViewModel: ThemeViewModel = hiltViewModel(),
@@ -55,12 +55,12 @@ fun CounterAppTheme(
             )
         }
 
-        isDarkMode -> DarkColorScheme
-        else -> LightColorScheme
+        isDarkMode -> DefaultDarkColorScheme
+        else -> DefaultLightColorScheme
     }
 
     MaterialTheme(
-        colorScheme = colorScheme, typography = Typography, content = content
+        colorScheme = colorScheme, typography = DefaultTypography, content = content
     )
 }
 
@@ -68,9 +68,9 @@ fun CounterAppTheme(
 fun PreviewAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val colorScheme = if (darkTheme) DefaultDarkColorScheme else DefaultLightColorScheme
     MaterialTheme(
-        colorScheme = colorScheme, typography = Typography
+        colorScheme = colorScheme, typography = DefaultTypography
     ) {
         Surface { content() }
     }

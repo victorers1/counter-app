@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.iteris.counterapp.ui.theme.CounterAppTheme
+import com.iteris.counterapp.ui.theme.DefaultAppTheme
 
 @Composable
 fun ConfirmDialog(
@@ -50,7 +50,7 @@ fun DialogCancelButton(text: String, onCLick: () -> Unit) {
 @Preview
 @Composable
 private fun PrevLight() {
-    CounterAppTheme {
+    DefaultAppTheme {
         ConfirmDialog(
             title = "Are you sure?",
             description = "Are you sure?",
@@ -63,7 +63,7 @@ private fun PrevLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PrevDark() {
-    CounterAppTheme {
+    DefaultAppTheme {
         ConfirmDialog(
             title = "Are you sure?",
             description = "Are you sure?",

@@ -9,7 +9,7 @@ data class HomeUiState(
     val isEditing: Boolean = false,
     val data: ArrayList<CounterEntity> = arrayListOf(),
     val counterNameMaxLength: Int = 30,
-    val error: ErrorState = ErrorState.NonError,
+    val error: ErrorState = ErrorState.NoError,
     val errors: Map<String, String> = mutableMapOf(),
     val appStartupInfo: AppStartupInfoEntity? = null
 )
