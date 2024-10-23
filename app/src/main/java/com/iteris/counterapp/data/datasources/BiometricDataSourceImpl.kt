@@ -1,6 +1,7 @@
 package com.iteris.counterapp.data.datasources
 
 import android.os.Build
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
@@ -10,19 +11,20 @@ import com.iteris.counterapp.data.models.BiometricPromptInfoModel
 import com.iteris.counterapp.domain.datasources.BiometricDataSource
 import com.iteris.counterapp.domain.entities.biometric_auth.BiometricAuthResultEntity
 import com.iteris.counterapp.domain.entities.biometric_auth.BiometricFeatStatusEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
+import kotlinx.coroutines.channels.Channel
 
-class BiometricDataSourceImpl @Inject constructor(private val activity: AppCompatActivity) :
-    BiometricDataSource {
-    val manager = BiometricManager.from(activity)
+class BiometricDataSourceImpl() : BiometricDataSource {
+    val resultChannel = Channel<BiometricAuthResultEntity>()
+
     val authenticators = if (Build.VERSION.SDK_INT >= 30) {
         BIOMETRIC_STRONG or DEVICE_CREDENTIAL
     } else BIOMETRIC_STRONG
 
-    override suspend fun authenticate(data: BiometricPromptInfoModel): BiometricAuthResultEntity {
+    override fun getAuthResultChannel(): Channel<BiometricAuthResultEntity> {
+        return resultChannel
+    }
 
+    override suspend fun showPrompt(activity: AppCompatActivity, data: BiometricPromptInfoModel) {
         val promptInfo = BiometricPrompt.PromptInfo.Builder().setTitle(data.title)
             .setDescription(data.description).setAllowedAuthenticators(authenticators)
 
@@ -30,50 +32,52 @@ class BiometricDataSourceImpl @Inject constructor(private val activity: AppCompa
             promptInfo.setNegativeButtonText(data.negativeButtonText)
         }
 
-        when (canAuthenticate()) {
+        val canAuth = canAuthenticate(activity)
+        Log.d("biometric_auth", "canAuth: $canAuth")
+        when (canAuth) {
             BiometricFeatStatusEntity.HardwareIsBusy -> {
-                return BiometricAuthResultEntity.HardwareIsBusy
+                resultChannel.trySend(BiometricAuthResultEntity.HardwareIsBusy)
+                return
             }
 
             BiometricFeatStatusEntity.UserNotEnrolled -> {
-                return BiometricAuthResultEntity.UserNotEnrolled
+                resultChannel.trySend(BiometricAuthResultEntity.UserNotEnrolled)
+                return
             }
 
             BiometricFeatStatusEntity.NoHardware -> {
-                return BiometricAuthResultEntity.NoHardware
+                resultChannel.trySend(BiometricAuthResultEntity.NoHardware)
+                return
             }
 
             else -> Unit
         }
 
-        var authResult: BiometricAuthResultEntity =
-            BiometricAuthResultEntity.AuthenticationError("Unknown error")
-
         val prompt = BiometricPrompt(activity, object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
-                authResult = BiometricAuthResultEntity.AuthenticationError(errString.toString())
+                Log.d("biometric_auth", "onAuthenticationError: $errorCode $errString")
+                resultChannel.trySend(BiometricAuthResultEntity.AuthenticationError(errString.toString()))
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
-                authResult = BiometricAuthResultEntity.AuthenticationSucceeded
+                Log.d("biometric_auth", "onAuthenticationSucceeded: $result")
+                resultChannel.trySend(BiometricAuthResultEntity.AuthenticationSucceeded)
             }
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                authResult = BiometricAuthResultEntity.AuthenticationFailed
+                Log.d("biometric_auth", "onAuthenticationFailed")
+                resultChannel.trySend(BiometricAuthResultEntity.AuthenticationFailed)
             }
         })
 
-        runBlocking(Dispatchers.IO) {
-            prompt.authenticate(promptInfo.build())
-        }
-
-        return authResult
+        prompt.authenticate(promptInfo.build())
     }
 
-    override suspend fun canAuthenticate(): BiometricFeatStatusEntity {
+    override suspend fun canAuthenticate(activity: AppCompatActivity): BiometricFeatStatusEntity {
+        val manager = BiometricManager.from(activity)
         when (manager.canAuthenticate(authenticators)) {
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
                 return BiometricFeatStatusEntity.HardwareIsBusy

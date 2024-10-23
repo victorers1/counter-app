@@ -79,6 +79,7 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.androidx.ui.test.android)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
 
@@ -99,9 +100,6 @@ dependencies {
     // Icons
     implementation(libs.androidx.material.icons.extended)
 
-    // Viewmodel
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-
     //Retrofit
     implementation(libs.retrofit)
 
@@ -119,6 +117,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)

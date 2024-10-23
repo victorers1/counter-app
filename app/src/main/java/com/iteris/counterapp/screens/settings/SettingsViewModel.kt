@@ -1,13 +1,16 @@
 package com.iteris.counterapp.screens.settings
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iteris.counterapp.domain.entities.biometric_auth.BiometricAuthResultEntity
 import com.iteris.counterapp.domain.usecases.appstartinfo.DeleteAppStartupInfoUseCase
 import com.iteris.counterapp.domain.usecases.biometric_auth.AuthenticateWithBiometryParams
 import com.iteris.counterapp.domain.usecases.biometric_auth.AuthenticateWithBiometryUseCase
+import com.iteris.counterapp.domain.usecases.biometric_auth.ListenToBiometricAuthUseCase
 import com.iteris.counterapp.domain.usecases.counters.DeleteAllCountersUseCase
 import com.iteris.counterapp.domain.usecases.settings.ReadAppSettingsUseCase
 import com.iteris.counterapp.domain.usecases.settings.WriteAppSettingsParams
@@ -17,13 +20,18 @@ import com.iteris.counterapp.ui.theme.ThemeModeEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val deleteAppStartupInfoUseCase: DeleteAppStartupInfoUseCase,
@@ -31,13 +39,16 @@ class SettingsViewModel @Inject constructor(
     private val readAppSettingsUseCase: ReadAppSettingsUseCase,
     private val writeAppSettingsUseCase: WriteAppSettingsUseCase,
     private val authenticateWithBiometryUseCase: AuthenticateWithBiometryUseCase,
+    private val listenToBiometricAuthUseCase: ListenToBiometricAuthUseCase,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
+    var authPromptResults: Flow<BiometricAuthResultEntity> = flowOf()
 
     init {
         loadSettings()
+        loadBiometricAuthResultChannel()
     }
 
     private fun loadSettings() {
@@ -55,6 +66,16 @@ class SettingsViewModel @Inject constructor(
             }.onFailure {
                 _uiState.update { state -> state.copy(error = ErrorState.ReadError) }
             }
+        }
+    }
+
+    private fun loadBiometricAuthResultChannel() {
+        val result = listenToBiometricAuthUseCase.execute()
+        result.onSuccess {
+            authPromptResults = it.receiveAsFlow()
+            Log.d("biometric_auth", "onSuccess: loadBiometricAuthResultChannel(): $it")
+        }.onFailure {
+            Log.d("biometric_auth", "onFailure: loadBiometricAuthResultChannel(): $it")
         }
     }
 
@@ -102,23 +123,21 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun tryToOpenSecretScreen(): Boolean {
-        var canProceed = false
-
+    fun showBiometricAuthPrompt(activity: AppCompatActivity, context: Context) {
         viewModelScope.launch {
             val params = AuthenticateWithBiometryParams(
                 title = "Authentication needed",
-                description = "Counter App needs to authenticate to open the secret screen"
+                description = "Counter App needs to authenticate to open the secret screen",
+                activity = activity
             )
 
             val result = authenticateWithBiometryUseCase.execute(params)
 
             result.onSuccess {
-                canProceed = it == BiometricAuthResultEntity.AuthenticationSucceeded
+                Log.d("biometric_auth", "onSuccess: showBiometricAuthPrompt()")
             }.onFailure {
-                canProceed = false
+                Log.d("biometric_auth", "onFailure: showBiometricAuthPrompt(): $it")
             }
         }
-        return canProceed
     }
 }
