@@ -78,32 +78,32 @@ class BiometricDataSourceImpl() : BiometricDataSource {
 
     override suspend fun canAuthenticate(activity: AppCompatActivity): BiometricFeatStatusEntity {
         val manager = BiometricManager.from(activity)
-        when (manager.canAuthenticate(authenticators)) {
+        return when (manager.canAuthenticate(authenticators)) {
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
-                return BiometricFeatStatusEntity.HardwareIsBusy
+                BiometricFeatStatusEntity.HardwareIsBusy
             }
 
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
-                return BiometricFeatStatusEntity.UserNotEnrolled
+                BiometricFeatStatusEntity.UserNotEnrolled
             }
 
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
-                return BiometricFeatStatusEntity.NoHardware
+                BiometricFeatStatusEntity.NoHardware
             }
 
             BiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED -> {
-                return BiometricFeatStatusEntity.SecurityUpdateRequired
+                BiometricFeatStatusEntity.SecurityUpdateRequired
             }
 
             BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> {
-                return BiometricFeatStatusEntity.Unsupported
+                BiometricFeatStatusEntity.Unsupported
             }
 
             BiometricManager.BIOMETRIC_SUCCESS -> {
-                return BiometricFeatStatusEntity.Success
+                BiometricFeatStatusEntity.CanAuthenticate
             }
 
-            else -> return BiometricFeatStatusEntity.StatusUnknow
+            else -> BiometricFeatStatusEntity.StatusUnknown
         }
     }
 }

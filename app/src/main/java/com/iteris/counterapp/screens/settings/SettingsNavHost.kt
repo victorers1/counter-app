@@ -8,7 +8,9 @@ import androidx.navigation.compose.rememberNavController
 import com.iteris.counterapp.screens.aboutus.AboutUsScreen
 import com.iteris.counterapp.screens.policies.PoliciesScreen
 import com.iteris.counterapp.screens.secret.SecretScreen
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @Composable
 fun SettingsNavHost() {
     val settingsNavHostController: NavHostController = rememberNavController()

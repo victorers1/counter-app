@@ -17,7 +17,7 @@ import com.iteris.counterapp.ui.theme.PreviewAppTheme
 
 @Composable
 fun SecretScreen(onPop: () -> Unit) {
-    Scaffold(topBar = { NavigateBackTopAppBar(title = "Back", onPop = onPop) }) {
+    Scaffold(topBar = { NavigateBackTopAppBar(title = "Secret Screen", onPop = onPop) }) {
         Box(
             modifier = Modifier
                 .fillMaxSize()

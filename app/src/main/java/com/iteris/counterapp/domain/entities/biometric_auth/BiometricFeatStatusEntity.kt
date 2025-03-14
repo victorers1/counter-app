@@ -4,12 +4,12 @@ sealed interface BiometricFeatStatusEntity {
     /**
      * Equivalent to {@link android.hardware.biometrics.BiometricManager#BIOMETRIC_SUCCESS}
      */
-    data object Success : BiometricFeatStatusEntity
+    data object CanAuthenticate : BiometricFeatStatusEntity
 
     /**
      * Equivalent to {@link android.hardware.biometrics.BiometricManager#BIOMETRIC_STATUS_UNKNOWN}
      */
-    data object StatusUnknow : BiometricFeatStatusEntity
+    data object StatusUnknown : BiometricFeatStatusEntity
 
     /**
      * Equivalent to {@link android.hardware.biometrics.BiometricManager#BIOMETRIC_ERROR_UNSUPPORTED}

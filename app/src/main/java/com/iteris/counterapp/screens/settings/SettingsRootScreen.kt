@@ -66,7 +66,6 @@ fun SettingsRootScreen(settingsNavController: NavController) {
     LaunchedEffect(Unit) {
         viewModel.authPromptResults.collect {
             Log.d("biometric_auth", "collected value $it")
-
             when (it) {
                 BiometricAuthResultEntity.AuthenticationSucceeded -> {
                     settingsNavController.navigate(SettingsTabScreens.Secret.route)
@@ -141,9 +140,7 @@ fun SettingsRootScreen(settingsNavController: NavController) {
 
                 AppVersion(
                     modifier = Modifier
-                        .padding(
-                            top = 56.dp, bottom = innerPadding.calculateBottomPadding()
-                        )
+                        .padding(top = 56.dp, bottom = innerPadding.calculateBottomPadding())
                         .align(Alignment.CenterHorizontally)
                 )
             }
